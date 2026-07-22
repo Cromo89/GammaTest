@@ -1,0 +1,87 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>01-heuristica · gamma-landing</title>
+  <style>
+:root{
+  --bg:#f5f3ee; --surface:#ffffff; --surface-2:#faf8f3; --border:#ddd7ca;
+  --text:#1c1a16; --text-muted:#6c6555; --accent:#3a5a52;
+  --sev-critico:#a3312a; --sev-riesgo:#96631a; --sev-atencion:#3a5a7a;
+  --font-display:'Fraunces',ui-serif,Georgia,serif; --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#15130f; --surface:#1d1a15; --surface-2:#211e18; --border:#3a352a; --text:#ede8dd; --text-muted:#a39a86; --accent:#7fae9f;
+    --sev-critico:#e5776f; --sev-riesgo:#e0a94f; --sev-atencion:#7fa8d6; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 var(--font-body);padding:48px 24px 96px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:var(--font-display);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:600}
+.meta{color:var(--text-muted);font-size:12.5px;margin-bottom:28px;font-variant-numeric:tabular-nums}
+.summary{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:32px;line-height:1.65}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:3px;padding:3px 9px;font-size:11px;font-weight:600;margin-right:6px;font-variant-numeric:tabular-nums;border:1px solid currentColor}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:22px 24px;margin-bottom:14px;border-left-width:3px}
+.card h3{margin:2px 0 8px;font-size:17px}
+.id{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.02em}
+.field{margin-top:12px}
+.field b{display:block;font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600}
+.loc{font-family:var(--font-mono);font-size:12px;color:var(--accent);background:var(--surface-2);border-radius:3px;padding:6px 10px;margin-top:4px;border:1px solid var(--border)}
+.swatchrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.swatch{border-radius:4px;padding:12px 14px;font-family:var(--font-mono);font-size:11px;min-width:150px;border:1px solid var(--border);background:var(--surface-2)}
+a{color:var(--accent)}
+.backlink{display:inline-block;margin-bottom:20px;color:var(--text-muted);font-size:12.5px;text-decoration:none}
+.backlink:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;gap:16px}
+.row a{font-family:var(--font-mono);font-size:14px;font-weight:600;text-decoration:none;color:var(--text)}
+.row a:hover{color:var(--accent)}
+.row-counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+</style></head><body><div class="wrap">
+  <a class="backlink" href="../index.html">← Volver al índice</a>
+  <h1>01-heuristica</h1>
+  <div class="meta">gamma-landing · 2026-07-21 · 1 pantalla(s), 9 archivo(s) revisados</div>
+  <div class="summary">
+    <div>La landing navega sin errores duros, pero pierde puntos en visibilidad de estado (sección activa, apertura en pestaña nueva) y en cómo el patrón visual de 'Permanencia' comunica su contenido.</div>
+    <div style="margin-top:12px">4 hallazgo(s): <span class="pill" style="color:var(--sev-riesgo)">2 Riesgo</span> <span class="pill" style="color:var(--sev-atencion)">2 Atención</span></div>
+    <div class="field"><b>Scores por heurística</b><span class="pill" style="color:var(--text-muted)">H1: riesgo</span> <span class="pill" style="color:var(--text-muted)">H2: riesgo</span> <span class="pill" style="color:var(--text-muted)">H3: bueno</span> <span class="pill" style="color:var(--text-muted)">H4: bueno</span> <span class="pill" style="color:var(--text-muted)">H5: bueno</span> <span class="pill" style="color:var(--text-muted)">H6: atencion</span> <span class="pill" style="color:var(--text-muted)">H7: bueno</span> <span class="pill" style="color:var(--text-muted)">H8: atencion</span> <span class="pill" style="color:var(--text-muted)">H9: bueno</span> <span class="pill" style="color:var(--text-muted)">H10: bueno</span></div>
+  </div>
+  
+    <div class="card" style="border-left-color:var(--sev-riesgo)">
+      <span class="id">HEU-001</span>
+      <span class="pill" style="color:var(--sev-riesgo)"> Riesgo</span>
+      <h3>El nav no indica en qué sección estás durante el scroll</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-nav.tsx:11</div></div>
+      <div class="field"><b>Descripción</b>Los links 'Cómo funciona', 'Formatos' y 'Permanencia' navegan por ancla, pero ninguno cambia de estado cuando esa sección queda en viewport durante el scroll — al bajar por la página, el nav se ve exactamente igual sin importar dónde estés parado.</div>
+      <div class="field"><b>Evidencia</b>Verificado en vivo: al llegar a #formatos vía scroll, getComputedStyle de los 3 links de sección devuelve el mismo color (rgb(122,148,171)) y font-weight 400 sin importar la sección visible; no hay IntersectionObserver ni lógica de sección activa en landing-nav.tsx</div>
+      <div class="field"><b>Recomendación</b>Agregar un IntersectionObserver simple sobre las 3 secciones ancladas (#como-funciona, #formatos, #permanencia) que aplique text-foreground/font-medium al link correspondiente cuando su sección cruza el centro del viewport</div>
+      
+    </div>
+    <div class="card" style="border-left-color:var(--sev-riesgo)">
+      <span class="id">HEU-002</span>
+      <span class="pill" style="color:var(--sev-riesgo)"> Riesgo</span>
+      <h3>'Permanencia' usa el patrón visual de una tabla de precios para comunicar madurez, no costo</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-permanence.tsx:47</div></div>
+      <div class="field"><b>Descripción</b>La sección explica qué es cada nivel (Alpha/Beta/Gamma) y cuándo usarlo, pero la envuelve en la estructura canónica de un pricing table SaaS: badge arriba a la derecha, valor grande y bold centrado (mismo lugar y peso visual que un precio), línea divisoria, checklist con ✓ verdes, y la card 'Gamma' destacada con borde+fondo tintado como plan 'recomendado'. Un usuario reconoce ese patrón como 'elegí qué plan comprar' antes de leer una palabra del contenido real.</div>
+      <div class="field"><b>Evidencia</b>Estructura idéntica en las 3 cards (título+badge, valor grande, descripción corta, divider, checklist) — el mismo layout que usan Stripe/la mayoría de pricing pages; card 'gamma' con clase condicional 'border-brand-teal bg-brand-teal/5' (línea 52) replica el tratamiento visual de 'plan destacado'</div>
+      <div class="field"><b>Recomendación</b>Romper la semejanza con pricing: reemplazar el valor grande centrado por una línea de tiempo horizontal (Alpha → Beta → Gamma con flechas de progresión) o un layout de fila en vez de 3 cards idénticas, quitar el borde/fondo especial de 'Gamma' (no es 'el plan que más conviene comprar', es 'el destino final del journey') y mover el badge junto al título en vez de esquina superior derecha (posición típica de 'tag de plan')</div>
+      
+    </div>
+    <div class="card" style="border-left-color:var(--sev-atencion)">
+      <span class="id">HEU-003</span>
+      <span class="pill" style="color:var(--sev-atencion)"> Atención</span>
+      <h3>Los 3 CTAs hacia el dashboard abren pestaña nueva sin ningún aviso</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-nav.tsx:22</div><div class="loc">landing — src/pages/landing/components/landing-hero.tsx:28</div><div class="loc">landing — src/pages/landing/components/landing-cta.tsx:19</div></div>
+      <div class="field"><b>Descripción</b>'Ir a mi espacio', 'Comenzar a publicar' y 'Entrar a Gamma' usan target=&quot;_blank&quot; sin ningún indicador visual (ícono de salida, título, o texto) de que la acción abre una pestaña nueva en vez de navegar en la misma.</div>
+      <div class="field"><b>Evidencia</b>Los 3 Link tienen target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; pero el mismo ícono ArrowRight que usa cualquier CTA de navegación normal, sin distinción visual</div>
+      <div class="field"><b>Recomendación</b>Agregar aria-label o title=&quot;Se abre en una pestaña nueva&quot; a los 3 links, y considerar un ícono distinto (ExternalLink de lucide-react, ya usado en el dashboard) en vez de ArrowRight para señalizar la apertura externa</div>
+      
+    </div>
+    <div class="card" style="border-left-color:var(--sev-atencion)">
+      <span class="id">HEU-004</span>
+      <span class="pill" style="color:var(--sev-atencion)"> Atención</span>
+      <h3>Las 5 secciones de contenido repiten la misma fórmula sin variación de énfasis</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-problem.tsx:21</div><div class="loc">landing — src/pages/landing/components/landing-steps.tsx:10</div><div class="loc">landing — src/pages/landing/components/landing-formats.tsx:9</div><div class="loc">landing — src/pages/landing/components/landing-permanence.tsx:35</div><div class="loc">landing — src/pages/landing/components/landing-cta.tsx:6</div></div>
+      <div class="field"><b>Descripción</b>Problem, Steps, Formats, Permanence y CTA comparten exactamente la misma composición: eyebrow de 10px uppercase cyan, H2 de 36px, párrafo muted de 15px, mismo max-w-6xl, mismo py-24. Al hacer scroll, la página se siente plana porque nada distingue visualmente qué sección importa más — coincide con la sensación reportada de que 'está muy plana'.</div>
+      <div class="field"><b>Evidencia</b>grep de 'text-[10px]' + 'font-heading text-4xl' + 'py-24' aparece idéntico en los 5 archivos listados; ninguna sección rompe el patrón con un fondo, ancho o tratamiento distinto</div>
+      <div class="field"><b>Recomendación</b>Introducir 1-2 quiebres deliberados de jerarquía: por ejemplo dar a 'Cómo funciona' (la explicación central del producto) un fondo distinto o ancho completo, y reducir el peso visual de secciones secundarias (Formatos) con un layout más compacto en vez de repetir el mismo bloque eyebrow+H2+grid</div>
+      
+    </div>
+  </div></body></html>

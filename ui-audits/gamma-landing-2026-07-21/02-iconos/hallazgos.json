@@ -1,0 +1,47 @@
+{
+  "auditoria": "02-iconos",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 3 },
+  "resumen": "La landing no usa el sistema de íconos del resto del producto (lucide-react): resuelve 6 conceptos ilustrativos con glifos Unicode escritos a mano, y uno de ellos no renderiza reconociblemente.",
+  "hallazgos": [
+    {
+      "id": "ICO-001",
+      "titulo": "El ícono de 'React / Vite' no renderiza como átomo — se ve como un asterisco deforme",
+      "severidad": "critico",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-formats.tsx", "linea": 3 }
+      ],
+      "descripcion": "El glifo Unicode ⚛ (U+269B, símbolo de átomo) no está soportado por la fuente cargada (Space Grotesk/Inter) y cae a un glifo de reemplazo que se ve como un asterisco o copo irregular, no como el átomo que representa a React.",
+      "evidencia": "Screenshot en vivo (zoom sobre la fila de formatos): 'HTML' con `</>` se lee perfecto, 'React / Vite' con ⚛ se ve como un asterisco deforme, 'Next.js' con `N` se lee perfecto pero es una letra suelta, no un símbolo — los 3 íconos de la misma fila no comparten ni sistema ni calidad de render",
+      "recomendacion": "Reemplazar los 3 glifos de texto por SVGs reales de lucide-react (ya usado en todo el resto del producto): Code2 para HTML (ya se usa en project-card.tsx), Atom no existe en lucide pero Zap o Box son alternativas neutrales, y para Next.js un monograma controlado como <span> con el mismo tratamiento visual que los otros dos en vez de una letra suelta sin caja",
+      "extra": {
+        "concepto": "formato-de-proyecto",
+        "variantes": [
+          { "nombre": "</>",  "tamano": "14px (heredado, font-heading)", "color": "brand-teal", "pantallas": ["landing#formatos"] },
+          { "nombre": "⚛ (no renderiza)", "tamano": "14px", "color": "brand-teal", "pantallas": ["landing#formatos"] },
+          { "nombre": "N", "tamano": "14px", "color": "brand-teal", "pantallas": ["landing#formatos"] }
+        ]
+      }
+    },
+    {
+      "id": "ICO-002",
+      "titulo": "La landing resuelve 6 íconos con glifos Unicode en vez del sistema lucide-react del producto",
+      "severidad": "riesgo",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-problem.tsx", "linea": 3 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-formats.tsx", "linea": 2 }
+      ],
+      "descripcion": "El checklist 'Por qué Gamma' (↥, ⌁, ◉) y la fila 'Formatos' (</>, ⚛, N) resuelven el mismo concepto — ícono ilustrativo dentro de una caja de acento — con caracteres de texto escritos a mano. El resto del portal (sidebar, botones, cards de proyecto, wizard) usa exclusivamente SVG de lucide-react con stroke-width 2 consistente. Ningún glifo Unicode comparte ese grosor de trazo, así que se ven más finos/inconsistentes incluso los que sí renderizan bien.",
+      "evidencia": "grep de imports 'lucide-react' en src/pages/landing/: solo ArrowRight (nav, hero, cta) — 0 imports de lucide en landing-problem.tsx y landing-formats.tsx, que en cambio usan icon: '↥' / '⌁' / '◉' / '</>' / '⚛' / 'N' como strings",
+      "recomendacion": "Migrar los 6 conceptos a componentes de lucide-react: Upload o Server para 'sin infraestructura', Link2 para 'URL corporativa', Eye para 'visibilidad y control', y los íconos de formato descritos en ICO-001 — consistente con cómo ya se resolvieron los íconos del dashboard (Code2, Globe, Copy, etc.)",
+      "extra": {
+        "concepto": "icono-ilustrativo-en-caja-de-acento",
+        "variantes": [
+          { "nombre": "↥ / ⌁ / ◉ (Unicode)", "tamano": "16px equivalente", "color": "brand-teal", "pantallas": ["landing#inicio"] },
+          { "nombre": "SVG lucide-react stroke-width 2", "tamano": "16px", "color": "token semántico", "pantallas": ["dashboard (proyectos, configuración, sidebar)"] }
+        ]
+      }
+    }
+  ]
+}

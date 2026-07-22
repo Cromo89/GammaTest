@@ -1,0 +1,82 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>02-iconos · gamma-landing</title>
+  <style>
+:root{
+  --bg:#f5f3ee; --surface:#ffffff; --surface-2:#faf8f3; --border:#ddd7ca;
+  --text:#1c1a16; --text-muted:#6c6555; --accent:#3a5a52;
+  --sev-critico:#a3312a; --sev-riesgo:#96631a; --sev-atencion:#3a5a7a;
+  --font-display:'Fraunces',ui-serif,Georgia,serif; --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#15130f; --surface:#1d1a15; --surface-2:#211e18; --border:#3a352a; --text:#ede8dd; --text-muted:#a39a86; --accent:#7fae9f;
+    --sev-critico:#e5776f; --sev-riesgo:#e0a94f; --sev-atencion:#7fa8d6; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 var(--font-body);padding:48px 24px 96px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:var(--font-display);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:600}
+.meta{color:var(--text-muted);font-size:12.5px;margin-bottom:28px;font-variant-numeric:tabular-nums}
+.summary{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:32px;line-height:1.65}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:3px;padding:3px 9px;font-size:11px;font-weight:600;margin-right:6px;font-variant-numeric:tabular-nums;border:1px solid currentColor}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:22px 24px;margin-bottom:14px;border-left-width:3px}
+.card h3{margin:2px 0 8px;font-size:17px}
+.id{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.02em}
+.field{margin-top:12px}
+.field b{display:block;font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600}
+.loc{font-family:var(--font-mono);font-size:12px;color:var(--accent);background:var(--surface-2);border-radius:3px;padding:6px 10px;margin-top:4px;border:1px solid var(--border)}
+.swatchrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.swatch{border-radius:4px;padding:12px 14px;font-family:var(--font-mono);font-size:11px;min-width:150px;border:1px solid var(--border);background:var(--surface-2)}
+a{color:var(--accent)}
+.backlink{display:inline-block;margin-bottom:20px;color:var(--text-muted);font-size:12.5px;text-decoration:none}
+.backlink:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;gap:16px}
+.row a{font-family:var(--font-mono);font-size:14px;font-weight:600;text-decoration:none;color:var(--text)}
+.row a:hover{color:var(--accent)}
+.row-counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+</style></head><body><div class="wrap">
+  <a class="backlink" href="../index.html">← Volver al índice</a>
+  <h1>02-iconos</h1>
+  <div class="meta">gamma-landing · 2026-07-21 · 1 pantalla(s), 3 archivo(s) revisados</div>
+  <div class="summary">
+    <div>La landing no usa el sistema de íconos del resto del producto (lucide-react): resuelve 6 conceptos ilustrativos con glifos Unicode escritos a mano, y uno de ellos no renderiza reconociblemente.</div>
+    <div style="margin-top:12px">2 hallazgo(s): <span class="pill" style="color:var(--sev-critico)">1 Crítico</span> <span class="pill" style="color:var(--sev-riesgo)">1 Riesgo</span></div>
+    
+  </div>
+  
+    <div class="card" style="border-left-color:var(--sev-critico)">
+      <span class="id">ICO-001</span>
+      <span class="pill" style="color:var(--sev-critico)"> Crítico</span>
+      <h3>El ícono de 'React / Vite' no renderiza como átomo — se ve como un asterisco deforme</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-formats.tsx:3</div></div>
+      <div class="field"><b>Descripción</b>El glifo Unicode ⚛ (U+269B, símbolo de átomo) no está soportado por la fuente cargada (Space Grotesk/Inter) y cae a un glifo de reemplazo que se ve como un asterisco o copo irregular, no como el átomo que representa a React.</div>
+      <div class="field"><b>Evidencia</b>Screenshot en vivo (zoom sobre la fila de formatos): 'HTML' con `&lt;/&gt;` se lee perfecto, 'React / Vite' con ⚛ se ve como un asterisco deforme, 'Next.js' con `N` se lee perfecto pero es una letra suelta, no un símbolo — los 3 íconos de la misma fila no comparten ni sistema ni calidad de render</div>
+      <div class="field"><b>Recomendación</b>Reemplazar los 3 glifos de texto por SVGs reales de lucide-react (ya usado en todo el resto del producto): Code2 para HTML (ya se usa en project-card.tsx), Atom no existe en lucide pero Zap o Box son alternativas neutrales, y para Next.js un monograma controlado como &lt;span&gt; con el mismo tratamiento visual que los otros dos en vez de una letra suelta sin caja</div>
+      <div class="swatchrow"><div class="swatch">
+            <div style="font-size:22px;margin-bottom:8px;font-family:var(--font-body)">&lt;/&gt;</div>
+            14px (heredado, font-heading) · brand-teal<br/><span style="color:var(--text-muted)">landing#formatos</span>
+          </div><div class="swatch">
+            <div style="font-size:22px;margin-bottom:8px;font-family:var(--font-body)">⚛ (no renderiza)</div>
+            14px · brand-teal<br/><span style="color:var(--text-muted)">landing#formatos</span>
+          </div><div class="swatch">
+            <div style="font-size:22px;margin-bottom:8px;font-family:var(--font-body)">N</div>
+            14px · brand-teal<br/><span style="color:var(--text-muted)">landing#formatos</span>
+          </div></div>
+    </div>
+    <div class="card" style="border-left-color:var(--sev-riesgo)">
+      <span class="id">ICO-002</span>
+      <span class="pill" style="color:var(--sev-riesgo)"> Riesgo</span>
+      <h3>La landing resuelve 6 íconos con glifos Unicode en vez del sistema lucide-react del producto</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/landing-problem.tsx:3</div><div class="loc">landing — src/pages/landing/components/landing-formats.tsx:2</div></div>
+      <div class="field"><b>Descripción</b>El checklist 'Por qué Gamma' (↥, ⌁, ◉) y la fila 'Formatos' (&lt;/&gt;, ⚛, N) resuelven el mismo concepto — ícono ilustrativo dentro de una caja de acento — con caracteres de texto escritos a mano. El resto del portal (sidebar, botones, cards de proyecto, wizard) usa exclusivamente SVG de lucide-react con stroke-width 2 consistente. Ningún glifo Unicode comparte ese grosor de trazo, así que se ven más finos/inconsistentes incluso los que sí renderizan bien.</div>
+      <div class="field"><b>Evidencia</b>grep de imports 'lucide-react' en src/pages/landing/: solo ArrowRight (nav, hero, cta) — 0 imports de lucide en landing-problem.tsx y landing-formats.tsx, que en cambio usan icon: '↥' / '⌁' / '◉' / '&lt;/&gt;' / '⚛' / 'N' como strings</div>
+      <div class="field"><b>Recomendación</b>Migrar los 6 conceptos a componentes de lucide-react: Upload o Server para 'sin infraestructura', Link2 para 'URL corporativa', Eye para 'visibilidad y control', y los íconos de formato descritos en ICO-001 — consistente con cómo ya se resolvieron los íconos del dashboard (Code2, Globe, Copy, etc.)</div>
+      <div class="swatchrow"><div class="swatch">
+            <div style="font-size:22px;margin-bottom:8px;font-family:var(--font-body)">↥ / ⌁ / ◉ (Unicode)</div>
+            16px equivalente · brand-teal<br/><span style="color:var(--text-muted)">landing#inicio</span>
+          </div><div class="swatch">
+            <div style="font-size:22px;margin-bottom:8px;font-family:var(--font-body)">SVG lucide-react stroke-width 2</div>
+            16px · token semántico<br/><span style="color:var(--text-muted)">dashboard (proyectos, configuración, sidebar)</span>
+          </div></div>
+    </div>
+  </div></body></html>

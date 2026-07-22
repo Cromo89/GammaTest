@@ -1,0 +1,49 @@
+{
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "input": "repo",
+  "alcance": {
+    "pantallas": 1,
+    "archivos_revisados": 9
+  },
+  "auditorias": {
+    "01-heuristica": {
+      "hallazgos": 4,
+      "por_severidad": {
+        "riesgo": 2,
+        "atencion": 2
+      }
+    },
+    "02-iconos": {
+      "hallazgos": 2,
+      "por_severidad": {
+        "critico": 1,
+        "riesgo": 1
+      }
+    },
+    "03-spacing": {
+      "hallazgos": 1,
+      "por_severidad": {
+        "riesgo": 1
+      }
+    },
+    "04-tipografia": {
+      "hallazgos": 1,
+      "por_severidad": {
+        "atencion": 1
+      }
+    },
+    "05-color": {
+      "hallazgos": 2,
+      "por_severidad": {
+        "atencion": 2
+      }
+    },
+    "07-radios": {
+      "hallazgos": 1,
+      "por_severidad": {
+        "atencion": 1
+      }
+    }
+  }
+}

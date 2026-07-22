@@ -1,0 +1,251 @@
+PROCESO DE TRABAJO — MOCK DE FRONTEND PORTAL GAMMA
+Documentación para presentación (Microsoft Loop)
+Fecha: 21 de julio de 2026
+
+
+RESUMEN
+
+Se construyó, desde cero, un mock navegable de diseño+frontend del portal Gamma
+(la plataforma de Cencosud para publicar prototipos digitales creados con IA),
+partiendo del sitio real ya en producción como referencia. El objetivo fue tener
+un espacio propio y editable para poder iterar sobre el diseño sin depender del
+sistema real, aplicar un nuevo tema visual, sumar una landing page, y finalmente
+auditar y mejorar la experiencia con un proceso de revisión de diseño formal.
+
+El trabajo se hizo en dos grandes bloques:
+  1. Construcción del mock (portar el portal real a un proyecto propio)
+  2. Rediseño y mejora (nuevo tema visual, landing page, auditoría UX/UI e
+     implementación de las mejoras encontradas)
+
+
+FASE 1 — ARRANQUE DEL PROYECTO
+
+Se definió que el proyecto a portar era "Gamma", un portal nuevo (sin relación
+con proyectos anteriores). A diferencia de otros proyectos donde se parte de un
+archivo HTML exportado, acá la fuente de referencia fue el sitio real y
+funcionando: gamma.pulsar.codes.
+
+Se armó la base técnica del proyecto (estructura de carpetas, sistema de diseño
+base, configuración del proyecto) de forma completamente aislada, sin mirar
+todavía el sitio real — esto para asegurar que la arquitectura del mock naciera
+limpia y no copiara por accidente decisiones técnicas del sistema original.
+
+Una vez verificada que esa base funcionaba correctamente, recién ahí se pasó a
+mirar el portal real para empezar a portar contenido.
+
+Nota de proceso: en este arranque hubo un incidente operativo (un comando de
+configuración inicial borró por error unos archivos de configuración interna
+del proceso de trabajo) que se resolvió pidiendo al usuario que volviera a
+compartir esos archivos. No afectó el resultado final, solo el tiempo del
+arranque.
+
+
+FASE 2 — ACCESO AL PORTAL REAL Y RECONOCIMIENTO
+
+Dado que Gamma requiere inicio de sesión corporativo (correo + código de
+verificación enviado por email), el usuario inició sesión personalmente en el
+navegador mientras se observaba el proceso paso a paso, sin que se manejaran
+credenciales ni códigos de acceso en ningún momento — una práctica de seguridad
+deliberada.
+
+Una vez dentro, se recorrió el portal real para entender qué pantallas existían:
+  - Pantalla de login (correo de trabajo)
+  - Pantalla de código de verificación (6 dígitos)
+  - Listado de Proyectos (inicialmente vacío, sin proyectos creados)
+  - Configuración de cuenta (niveles de plan: Alpha / Beta / Gamma)
+
+Como el listado de proyectos estaba vacío, se decidió crear un proyecto de
+ejemplo directamente en el sitio real de Gamma para poder ver el flujo completo
+de principio a fin. Esto reveló pantallas adicionales que no eran visibles
+antes:
+  - El asistente de "Nuevo despliegue" (4 pasos: subir archivo, detectar
+    proyecto, configurar nombre/URL, publicar)
+  - La página de detalle de un proyecto ya publicado, con su historial de
+    versiones y control de tiempo de vida (TTL)
+
+Con esto se completó el inventario real de todas las pantallas del producto.
+
+
+FASE 3 — CONSTRUCCIÓN DEL MOCK (PORTADO DE CONTENIDO)
+
+Se portaron todas las pantallas identificadas, replicando fielmente el diseño
+original (colores, tipografía, espaciados, textos) pero construidas de cero
+como componentes propios y editables:
+
+  - Identidad visual base (paleta de colores, tipografía)
+  - Estructura general (menú lateral, navegación)
+  - Pantalla de Proyectos (vacía y con proyectos)
+  - Pantalla de Configuración con los 3 niveles de plan
+  - Asistente de "Nuevo despliegue" completo (4 pasos)
+  - Página de detalle de proyecto con historial de publicaciones
+  - Pantallas de login (correo + código de verificación)
+
+Durante esta fase se incorporó una mejora funcional a pedido del usuario: en el
+sitio real, el nivel de plan (Alpha/Beta/Gamma) es solo informativo — no se
+puede cambiar directamente ahí, hay que pasar por un formulario de solicitud
+aparte. En el mock se decidió, como mejora de experiencia, permitir cambiar de
+plan con un clic directo, reflejándose al instante tanto en la pantalla de
+Configuración como en el menú lateral.
+
+Cada pantalla se fue mostrando y validando visualmente contra el sitio real a
+medida que se construía, antes de avanzar a la siguiente.
+
+
+FASE 4 — CAMBIO DE TEMA VISUAL (REBRANDING A "DEVEXP")
+
+El usuario proporcionó una auditoría de diseño existente de otra plataforma
+interna (con su propia paleta de colores, tipografía y estilos), pidiendo
+aplicar esos mismos criterios visuales al portal Gamma, pero bajo un nombre
+distinto: "DevExp" (sin usar en ningún lugar del proyecto el nombre de la
+plataforma original).
+
+Se aplicó un cambio de tema completo y consistente en todas las pantallas ya
+construidas:
+  - Nuevo color principal (verde, en reemplazo del violeta original)
+  - Nueva tipografía (una fuente para títulos, otra para texto general, y una
+    fuente de datos técnicos para etiquetas/códigos)
+  - Ajuste de bordes redondeados y sombras según la nueva referencia
+  - Mejora de accesibilidad: se agregó un indicador visual de foco de teclado
+    que el sistema de referencia no tenía (para personas que navegan sin mouse)
+
+Todas las pantallas construidas hasta ese momento (login, proyectos, detalle de
+proyecto, asistente de publicación, configuración) se actualizaron para reflejar
+este nuevo tema de forma uniforme.
+
+
+FASE 5 — LANDING PAGE
+
+El usuario compartió dos referencias de diseño adicionales para una landing
+page (la página pública de presentación del producto, distinta del panel
+interno). Se identificó que una de esas referencias era una maqueta alternativa
+de la aplicación (no el sitio real ya portado), por lo que se descartó como
+fuente técnica y se usó solo la landing.
+
+Se construyó la landing page completa: portada principal, sección de
+problema/solución, "cómo funciona" en 4 pasos, formatos compatibles,
+niveles de permanencia, llamado a la acción final y pie de página.
+
+Decisión de diseño relevante: la landing conserva su propio acento de marca
+(un degradado de colores) como elemento distintivo de la superficie de
+marketing, mientras que el panel interno (dashboard) sigue usando el verde
+sólido del tema DevExp — son dos capas de marca distintas y deliberadas, no una
+inconsistencia.
+
+Ajustes posteriores a pedido del usuario:
+  - Réplica exacta del isotipo (logo) de la referencia original
+  - Se quitaron los degradados de color en los botones (quedaron solo en
+    títulos y en el logo) por un tema de accesibilidad y legibilidad
+  - Los botones que llevan al panel interno ahora abren en una pestaña nueva,
+    para no perder la landing de vista
+  - Se actualizó el nombre de usuario de ejemplo en todo el mock
+  - Se verificó que la tipografía de la landing y la del panel interno fueran
+    exactamente la misma (por ser el mismo sitio)
+
+
+FASE 6 — AUDITORÍA DE DISEÑO Y MEJORAS
+
+El usuario pidió una revisión crítica del diseño de la landing, señalando
+puntos concretos: íconos que no se veían bien, patrones visuales repetidos, y
+la sección de niveles de plan que se sentía más como una tabla de precios de
+software que como información de producto.
+
+Se corrió un proceso formal de auditoría de diseño sobre la landing, en 6
+dimensiones de análisis:
+  1. Heurísticas de usabilidad
+  2. Consistencia de íconos
+  3. Espaciado y estructura de layout
+  4. Tipografía
+  5. Color y consistencia de la paleta
+  6. Bordes y radios
+
+Esta auditoría encontró 11 puntos de mejora concretos, con evidencia (capturas
+de pantalla y ubicación exacta de cada hallazgo), entre ellos:
+  - Un ícono que literalmente no se veía bien (confirmando lo que el usuario
+    había notado a simple vista)
+  - Falta de un sistema de íconos consistente en toda la landing
+  - La sección de niveles de plan efectivamente replicaba el patrón visual de
+    una tabla de precios de SaaS, en vez de comunicar madurez de producto
+  - El menú de navegación no indicaba en qué sección de la página estaba
+    el usuario al hacer scroll
+  - Los botones que abren una pestaña nueva no avisaban de eso
+  - Falta de variación visual entre secciones de la página (sensación de
+    "todo plano")
+  - Tres alturas distintas de botón para el mismo tipo de acción
+  - Algunos colores de marca estaban escritos "a mano" en vez de reutilizar
+    los definidos centralmente
+
+Se generó un reporte navegable (HTML) con el detalle de cada hallazgo,
+comparaciones visuales lado a lado, y quedó guardado como respaldo dentro del
+proyecto para consulta futura.
+
+Con la aprobación del usuario, se implementaron los 11 hallazgos en su
+totalidad:
+  - Se reemplazaron todos los íconos por un sistema de íconos real y
+    consistente
+  - Se rediseñó la sección de niveles de plan como una línea de tiempo de
+    madurez (Alpha → Beta → Gamma), en vez de una grilla de planes para
+    comprar
+  - El menú ahora marca visualmente en qué sección está el usuario mientras
+    hace scroll
+  - Los botones que abren pestaña nueva ahora lo indican
+  - Se le dio identidad propia a la sección "cómo funciona" para romper la
+    monotonía visual
+  - Se unificaron todos los botones de la landing bajo un mismo componente,
+    eliminando las alturas inconsistentes
+  - Se centralizaron los colores de marca sueltos
+
+Se verificó que el resultado final compilara sin errores y se revisó
+visualmente cada cambio contra el reporte de la auditoría antes de darlo por
+cerrado.
+
+
+VALOR DEL PROCESO
+
+Un punto a destacar para la presentación: las seis fases de este documento —
+desde el arranque del proyecto hasta la auditoría de diseño implementada — se
+completaron en una sola jornada de trabajo. No es un proyecto que se fue
+armando a lo largo de varias sesiones o semanas: se construyó, se retemó, se le
+sumó una landing page nueva y se auditó y corrigió, todo el mismo día.
+
+Algunos puntos concretos de eficiencia que vale la pena resaltar:
+
+  - El panel interno completo (todas las pantallas del producto real, portadas
+    fielmente) quedó operativo en muy poco tiempo desde el arranque del
+    proyecto, incluyendo la base técnica desde cero.
+
+  - El documento de tokens de diseño para el nuevo tema DevExp se entregó una
+    sola vez y se aplicó de forma correcta y consistente en todas las
+    pantallas ya construidas en un solo pase, sin retrabajo — colores,
+    tipografía, bordes y hasta una mejora de accesibilidad que el sistema de
+    referencia no tenía.
+
+  - La sesión de trabajo se sostuvo de forma continua durante toda la tarde,
+    encadenando construcción, exploración del sitio real, rediseño, una
+    landing page nueva y una auditoría formal con su implementación completa,
+    sin interrupciones por límites técnicos de la herramienta.
+
+  - El proceso guiado (el "skill" usado para estructurar el trabajo) se
+    mantuvo ágil y sólido en todas sus etapas: los checkpoints visuales
+    permitieron detectar y corregir desvíos al instante (por ejemplo, ajustes
+    de color en botones o el logo de marca), y el traspaso desde la
+    construcción hacia la auditoría y su implementación fue directo, sin
+    fricción ni pasos redundantes.
+
+En conjunto, esto demuestra que el flujo de trabajo (construir el mock, aplicar
+un nuevo sistema de diseño, sumar una pieza nueva como la landing, y cerrar con
+una auditoría de calidad implementada) es reproducible dentro de una sola
+jornada — un argumento fuerte para presentar el método, no solo el resultado.
+
+
+ESTADO ACTUAL
+
+El mock del portal Gamma está completo y navegable, con:
+  - Todas las pantallas del producto real portadas fielmente
+  - Un nuevo tema visual (DevExp) aplicado de forma consistente en todo el
+    sitio
+  - Una landing page nueva, conectada al panel interno
+  - Una auditoría de diseño formal ya realizada e implementada en su totalidad
+
+El proyecto queda disponible para seguir iterando: portar funcionalidades
+adicionales del sitio real que aún no se exploraron, auditar otras pantallas
+además de la landing, o seguir refinando el sistema de diseño.

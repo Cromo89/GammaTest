@@ -1,0 +1,22 @@
+{
+  "auditoria": "04-tipografia",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 9 },
+  "resumen": "La escala tipográfica de la landing es limpia y consistente (eyebrows 10px, subtítulos 15px, headings en font-heading); el único cluster fragmentado es consecuencia directa del botón no unificado (ver 03-spacing).",
+  "hallazgos": [
+    {
+      "id": "TIP-001",
+      "titulo": "Texto de botón en 12px (nav) vs 14px (hero/cta) para el mismo rol",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-nav.tsx", "linea": 24 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-hero.tsx", "linea": 30 }
+      ],
+      "descripcion": "El botón del nav usa text-xs (12px) y los del hero/cta usan text-sm (14px) para el mismo tipo de contenido ('acción primaria en botón') — es el mismo síntoma que la altura divergente reportada en SPC-001, no un problema tipográfico aislado.",
+      "evidencia": "landing-nav.tsx:24 tiene text-xs; landing-hero.tsx:30 y landing-cta.tsx:21 tienen text-sm",
+      "recomendacion": "Se resuelve solo al implementar SPC-001 (extender Button con tamaño 'lg'): cada tamaño de botón ya trae su text-size correcto definido una sola vez en el componente, sin volver a elegirlo por archivo",
+      "extra": { "cluster": { "valores": ["12px", "14px"], "usos": 4, "rol_propuesto": "texto-de-boton-primario" }, "escala_propuesta": null, "componente_candidato": null }
+    }
+  ]
+}

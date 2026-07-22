@@ -1,0 +1,60 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>07-radios · gamma-landing</title>
+  <style>
+:root{
+  --bg:#f5f3ee; --surface:#ffffff; --surface-2:#faf8f3; --border:#ddd7ca;
+  --text:#1c1a16; --text-muted:#6c6555; --accent:#3a5a52;
+  --sev-critico:#a3312a; --sev-riesgo:#96631a; --sev-atencion:#3a5a7a;
+  --font-display:'Fraunces',ui-serif,Georgia,serif; --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#15130f; --surface:#1d1a15; --surface-2:#211e18; --border:#3a352a; --text:#ede8dd; --text-muted:#a39a86; --accent:#7fae9f;
+    --sev-critico:#e5776f; --sev-riesgo:#e0a94f; --sev-atencion:#7fa8d6; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 var(--font-body);padding:48px 24px 96px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:var(--font-display);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:600}
+.meta{color:var(--text-muted);font-size:12.5px;margin-bottom:28px;font-variant-numeric:tabular-nums}
+.summary{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:32px;line-height:1.65}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:3px;padding:3px 9px;font-size:11px;font-weight:600;margin-right:6px;font-variant-numeric:tabular-nums;border:1px solid currentColor}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:22px 24px;margin-bottom:14px;border-left-width:3px}
+.card h3{margin:2px 0 8px;font-size:17px}
+.id{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:.02em}
+.field{margin-top:12px}
+.field b{display:block;font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600}
+.loc{font-family:var(--font-mono);font-size:12px;color:var(--accent);background:var(--surface-2);border-radius:3px;padding:6px 10px;margin-top:4px;border:1px solid var(--border)}
+.swatchrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.swatch{border-radius:4px;padding:12px 14px;font-family:var(--font-mono);font-size:11px;min-width:150px;border:1px solid var(--border);background:var(--surface-2)}
+a{color:var(--accent)}
+.backlink{display:inline-block;margin-bottom:20px;color:var(--text-muted);font-size:12.5px;text-decoration:none}
+.backlink:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;gap:16px}
+.row a{font-family:var(--font-mono);font-size:14px;font-weight:600;text-decoration:none;color:var(--text)}
+.row a:hover{color:var(--accent)}
+.row-counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+</style></head><body><div class="wrap">
+  <a class="backlink" href="../index.html">← Volver al índice</a>
+  <h1>07-radios</h1>
+  <div class="meta">gamma-landing · 2026-07-21 · 1 pantalla(s), 1 archivo(s) revisados</div>
+  <div class="summary">
+    <div>Un solo valor fuera de la escala nombrada de tokens.css, y es un caso justificado (asset de marca replicado a la fuente original) más que un descuido.</div>
+    <div style="margin-top:12px">1 hallazgo(s): <span class="pill" style="color:var(--sev-atencion)">1 Atención</span></div>
+    
+  </div>
+  
+    <div class="card" style="border-left-color:var(--sev-atencion)">
+      <span class="id">RAD-001</span>
+      <span class="pill" style="color:var(--sev-atencion)"> Atención</span>
+      <h3>El logo usa 7px arbitrario, fuera de la escala de 6 radios ya nombrada</h3>
+      <div class="field"><b>Ubicaciones</b><div class="loc">landing — src/pages/landing/components/brand-mark.tsx:6</div><div class="loc">landing — src/pages/landing/components/brand-mark.tsx:15</div></div>
+      <div class="field"><b>Descripción</b>Las dos formas del logo usan rounded-[7px], un valor que no coincide con ningún token de la escala ya nombrada en tokens.css (radius-sm=5, radius-md=6, radius-lg=8...). Es intencional — replica el radio exacto del asset de marca original — pero al no estar documentado como excepción, un futuro cambio de escala no lo va a arrastrar ni va a ser obvio que es a propósito.</div>
+      <div class="field"><b>Evidencia</b>tokens.css define radius-sm:5px, radius-md:6px, radius-lg:8px, radius-xl:12px, radius-2xl:16px, radius-3xl:18px; brand-mark.tsx:6 y :15 usan rounded-[7px], que cae entre radius-md y radius-lg sin coincidir con ninguno</div>
+      <div class="field"><b>Recomendación</b>Dejar el valor tal cual (es el radio real del logo, no un error) pero anclarlo a un token explícito --radius-brand-mark:7px en tokens.css con un comentario de una línea explicando que es una excepción de marca — así queda claro para cualquiera que lo revise después que no es un descuido</div>
+      <div class="swatchrow"><div class="swatch">
+            <div style="width:44px;height:44px;background:var(--accent);border-radius:7px;margin-bottom:8px"></div>
+            7px · 2 usos<br/><span style="color:var(--text-muted)">landing (nav, footer)</span>
+          </div></div>
+    </div>
+  </div></body></html>

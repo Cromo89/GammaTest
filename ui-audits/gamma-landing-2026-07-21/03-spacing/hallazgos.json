@@ -1,0 +1,31 @@
+{
+  "auditoria": "03-spacing",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 4 },
+  "resumen": "El único problema real de contenedor es el botón: ningún CTA de la landing reutiliza el componente Button de shared/ui, y las 3 reimplementaciones a mano divergen en altura entre sí.",
+  "hallazgos": [
+    {
+      "id": "SPC-001",
+      "titulo": "Tres alturas de botón distintas para el mismo rol de 'acción primaria', ninguna reutiliza el componente Button",
+      "severidad": "riesgo",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-nav.tsx", "linea": 24 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-hero.tsx", "linea": 30 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-cta.tsx", "linea": 21 },
+        { "pantalla": "dashboard", "archivo": "src/shared/ui/button.tsx", "linea": 7 }
+      ],
+      "descripcion": "El botón del nav ('Ir a mi espacio') mide h-10, los del hero y CTA ('Comenzar a publicar', 'Entrar a Gamma') miden h-12, y el componente Button real del sistema (usado en todo el dashboard) es h-8 — tres alturas para el mismo concepto de botón primario, porque ningún CTA de la landing importa el componente compartido: los 4 botones de la landing están reimplementados a mano con className repetido.",
+      "evidencia": "grep de 'h-10\\|h-12' en pages/landing/: h-10 en landing-nav.tsx:24, h-12 en landing-hero.tsx:30 y landing-cta.tsx:21; grep de 'shared/ui' en pages/landing/**: 0 resultados en los 8 archivos de componentes",
+      "recomendacion": "Extender el componente Button (shared/ui/button.tsx) con un tamaño 'lg' (h-12, usado en hero/cta) además del actual, y hacer que los 4 CTAs de landing lo importen en vez de reimplementar className a mano — elimina la divergencia y cualquier futura",
+      "extra": {
+        "medicion": {
+          "propiedad": "height",
+          "esperado": "un solo alto por rol de botón",
+          "obtenido": { "nav-cta": "40px (h-10)", "hero-cta": "48px (h-12)", "cta-final": "48px (h-12)", "dashboard-button": "32px (h-8)" }
+        },
+        "nivel": "contenedor"
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "auditoria": "01-heuristica",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 9 },
+  "resumen": "La landing navega sin errores duros, pero pierde puntos en visibilidad de estado (sección activa, apertura en pestaña nueva) y en cómo el patrón visual de 'Permanencia' comunica su contenido.",
+  "scores": {
+    "H1": "riesgo",
+    "H2": "riesgo",
+    "H3": "bueno",
+    "H4": "bueno",
+    "H5": "bueno",
+    "H6": "atencion",
+    "H7": "bueno",
+    "H8": "atencion",
+    "H9": "bueno",
+    "H10": "bueno"
+  },
+  "hallazgos": [
+    {
+      "id": "HEU-001",
+      "titulo": "El nav no indica en qué sección estás durante el scroll",
+      "severidad": "riesgo",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-nav.tsx", "linea": 11 }
+      ],
+      "descripcion": "Los links 'Cómo funciona', 'Formatos' y 'Permanencia' navegan por ancla, pero ninguno cambia de estado cuando esa sección queda en viewport durante el scroll — al bajar por la página, el nav se ve exactamente igual sin importar dónde estés parado.",
+      "evidencia": "Verificado en vivo: al llegar a #formatos vía scroll, getComputedStyle de los 3 links de sección devuelve el mismo color (rgb(122,148,171)) y font-weight 400 sin importar la sección visible; no hay IntersectionObserver ni lógica de sección activa en landing-nav.tsx",
+      "recomendacion": "Agregar un IntersectionObserver simple sobre las 3 secciones ancladas (#como-funciona, #formatos, #permanencia) que aplique text-foreground/font-medium al link correspondiente cuando su sección cruza el centro del viewport",
+      "extra": {
+        "heuristica": "H1",
+        "flujo": "navegación por scroll en la landing",
+        "mejora_ejemplo": "Al hacer scroll hasta 'Formatos', ese link pasa a blanco/semibold y los otros dos quedan muted — igual que el ítem activo del sidebar del dashboard"
+      }
+    },
+    {
+      "id": "HEU-002",
+      "titulo": "'Permanencia' usa el patrón visual de una tabla de precios para comunicar madurez, no costo",
+      "severidad": "riesgo",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-permanence.tsx", "linea": 47 }
+      ],
+      "descripcion": "La sección explica qué es cada nivel (Alpha/Beta/Gamma) y cuándo usarlo, pero la envuelve en la estructura canónica de un pricing table SaaS: badge arriba a la derecha, valor grande y bold centrado (mismo lugar y peso visual que un precio), línea divisoria, checklist con ✓ verdes, y la card 'Gamma' destacada con borde+fondo tintado como plan 'recomendado'. Un usuario reconoce ese patrón como 'elegí qué plan comprar' antes de leer una palabra del contenido real.",
+      "evidencia": "Estructura idéntica en las 3 cards (título+badge, valor grande, descripción corta, divider, checklist) — el mismo layout que usan Stripe/la mayoría de pricing pages; card 'gamma' con clase condicional 'border-brand-teal bg-brand-teal/5' (línea 52) replica el tratamiento visual de 'plan destacado'",
+      "recomendacion": "Romper la semejanza con pricing: reemplazar el valor grande centrado por una línea de tiempo horizontal (Alpha → Beta → Gamma con flechas de progresión) o un layout de fila en vez de 3 cards idénticas, quitar el borde/fondo especial de 'Gamma' (no es 'el plan que más conviene comprar', es 'el destino final del journey') y mover el badge junto al título en vez de esquina superior derecha (posición típica de 'tag de plan')",
+      "extra": {
+        "heuristica": "H2",
+        "flujo": "lectura de la sección Permanencia",
+        "mejora_ejemplo": "Timeline horizontal: Alpha (7 días, ideas tempranas) — flecha — Beta (30 días, validación) — flecha — Gamma (indefinido, consolidado), sin cards separadas ni plan 'destacado'"
+      }
+    },
+    {
+      "id": "HEU-003",
+      "titulo": "Los 3 CTAs hacia el dashboard abren pestaña nueva sin ningún aviso",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-nav.tsx", "linea": 22 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-hero.tsx", "linea": 28 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-cta.tsx", "linea": 19 }
+      ],
+      "descripcion": "'Ir a mi espacio', 'Comenzar a publicar' y 'Entrar a Gamma' usan target=\"_blank\" sin ningún indicador visual (ícono de salida, título, o texto) de que la acción abre una pestaña nueva en vez de navegar en la misma.",
+      "evidencia": "Los 3 Link tienen target=\"_blank\" rel=\"noopener noreferrer\" pero el mismo ícono ArrowRight que usa cualquier CTA de navegación normal, sin distinción visual",
+      "recomendacion": "Agregar aria-label o title=\"Se abre en una pestaña nueva\" a los 3 links, y considerar un ícono distinto (ExternalLink de lucide-react, ya usado en el dashboard) en vez de ArrowRight para señalizar la apertura externa",
+      "extra": {
+        "heuristica": "H6",
+        "flujo": "clic en cualquier CTA hacia el dashboard",
+        "mejora_ejemplo": "Botón 'Ir a mi espacio ↗' con ícono ExternalLink y title=\"Se abre en una pestaña nueva\""
+      }
+    },
+    {
+      "id": "HEU-004",
+      "titulo": "Las 5 secciones de contenido repiten la misma fórmula sin variación de énfasis",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-problem.tsx", "linea": 21 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-steps.tsx", "linea": 10 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-formats.tsx", "linea": 9 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-permanence.tsx", "linea": 35 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-cta.tsx", "linea": 6 }
+      ],
+      "descripcion": "Problem, Steps, Formats, Permanence y CTA comparten exactamente la misma composición: eyebrow de 10px uppercase cyan, H2 de 36px, párrafo muted de 15px, mismo max-w-6xl, mismo py-24. Al hacer scroll, la página se siente plana porque nada distingue visualmente qué sección importa más — coincide con la sensación reportada de que 'está muy plana'.",
+      "evidencia": "grep de 'text-[10px]' + 'font-heading text-4xl' + 'py-24' aparece idéntico en los 5 archivos listados; ninguna sección rompe el patrón con un fondo, ancho o tratamiento distinto",
+      "recomendacion": "Introducir 1-2 quiebres deliberados de jerarquía: por ejemplo dar a 'Cómo funciona' (la explicación central del producto) un fondo distinto o ancho completo, y reducir el peso visual de secciones secundarias (Formatos) con un layout más compacto en vez de repetir el mismo bloque eyebrow+H2+grid",
+      "extra": {
+        "heuristica": "H8",
+        "flujo": "scroll completo de la landing",
+        "mejora_ejemplo": "La sección 'Cómo funciona' pasa a fondo levemente distinto (bg-muted/30) a ancho completo, rompiendo el ritmo repetitivo de las demás secciones en max-w-6xl"
+      }
+    }
+  ]
+}

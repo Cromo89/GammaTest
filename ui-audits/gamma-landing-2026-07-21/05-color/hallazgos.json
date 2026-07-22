@@ -1,0 +1,50 @@
+{
+  "auditoria": "05-color",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 4 },
+  "resumen": "Los 3 tokens de marca (teal/cyan/blue) están bien definidos en tokens.css, pero 4 usos en la landing repiten los mismos valores como literal hex/rgb en vez de referenciar el token ya existente.",
+  "hallazgos": [
+    {
+      "id": "COL-001",
+      "titulo": "El logo y los dos glows de fondo duplican los tokens de marca como hex/rgb literal",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/brand-mark.tsx", "linea": 10 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/brand-mark.tsx", "linea": 19 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-hero.tsx", "linea": 7 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-cta.tsx", "linea": 7 }
+      ],
+      "descripcion": "brand-mark.tsx escribe '#2dd4bf', '#20b8d8' y '#1b6ef3' directo en el style del logo, y tanto el glow del hero como el del CTA usan 'rgb(27 110 243 / X%)' — que es exactamente --color-brand-blue (#1b6ef3) convertido a rgb — como literal en vez de var(--color-brand-blue). Si el acento de marca cambia de tono, hay que actualizarlo en 4 lugares además de tokens.css.",
+      "evidencia": "tokens.css define --color-brand-teal:#2dd4bf, --color-brand-cyan:#20b8d8, --color-brand-blue:#1b6ef3 (líneas 22-24); brand-mark.tsx repite los 3 hex literales en su style inline; landing-hero.tsx:7 y landing-cta.tsx:7 usan 'rgb(27_110_243' (= #1b6ef3) en una clase arbitraria de Tailwind",
+      "recomendacion": "En brand-mark.tsx, reemplazar los hex por var(--color-brand-teal)/var(--color-brand-cyan)/var(--color-brand-blue) en los objetos de style; en los dos glows, usar la utilidad de color de Tailwind (bg-brand-blue/25 con un elemento blur) en vez de la función CSS radial-gradient con rgb literal, o al menos referenciar var(--color-brand-blue) dentro del radial-gradient",
+      "extra": {
+        "cluster": {
+          "rol": "acento-de-marca-blue",
+          "valores": [
+            { "color": "#1b6ef3 literal", "usos": 3, "pantallas": ["landing (logo, glow hero, glow cta)"] },
+            { "color": "var(--color-brand-blue)", "usos": 0, "pantallas": [] }
+          ]
+        },
+        "token_propuesto": "var(--color-brand-blue)",
+        "contraste": null
+      }
+    },
+    {
+      "id": "COL-002",
+      "titulo": "El glow del indicador 'disponible' duplica el token --success como hex suelto",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/landing-hero.tsx", "linea": 44 }
+      ],
+      "descripcion": "El resplandor del punto verde junto a 'Disponible para equipos Cencosud' usa shadow-[0_0_8px_#34d399], y #34d399 es exactamente --color-devexp-emerald (el valor de --success en tokens.css) escrito a mano en vez de derivado del token.",
+      "evidencia": "tokens.css línea 19: --color-devexp-emerald:#34d399, usado como --success; landing-hero.tsx:44 tiene bg-success (correcto, usa el token) pero shadow-[0_0_8px_#34d399] (el mismo color, como literal) en el mismo elemento",
+      "recomendacion": "Reemplazar el shadow arbitrario por shadow-[0_0_8px_var(--color-success)] para que ambas propiedades del mismo punto deriven del mismo token",
+      "extra": {
+        "cluster": null,
+        "token_propuesto": "var(--color-success)",
+        "contraste": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-devexp-bg: #060d18;
+  --color-devexp-hover: rgb(255 255 255 / 5%);
+  --color-devexp-border: rgb(255 255 255 / 9%);
+  --color-devexp-text: #ffffff;
+  --color-devexp-text-muted: #7a94ab;
+  --color-devexp-primary: #1d9e75;
+  --color-devexp-primary-dim: rgb(29 158 117 / 15%);
+  --color-devexp-danger: #fb7185;
+  --color-devexp-amber: #fbbf24;
+  --color-devexp-violet: #378add;
+  --color-devexp-emerald: #34d399;
+
+  /* Acento exclusivo de superficies de marketing (landing) — el dashboard interno usa --primary (verde DevExp), nunca este degradado */
+  --color-brand-teal: #2dd4bf;
+  --color-brand-cyan: #20b8d8;
+  --color-brand-blue: #1b6ef3;
+
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 18px;
+  /* Excepción de marca: radio propio del logo (brand-mark.tsx), fuera de la escala genérica a propósito */
+  --radius-brand-mark: 7px;
+
+  --shadow-card: 0 40px 100px rgb(0 0 0 / 75%);
+  --shadow-modal: 0 24px 60px rgb(0 0 0 / 50%);
+
+  --ease-spring: cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+:root {
+  --background: var(--color-devexp-bg);
+  --foreground: var(--color-devexp-text);
+
+  --primary: var(--color-devexp-primary);
+  --primary-foreground: var(--color-devexp-text);
+
+  --muted: var(--color-devexp-hover);
+  --muted-foreground: var(--color-devexp-text-muted);
+
+  --destructive: var(--color-devexp-danger);
+  --destructive-foreground: var(--color-devexp-text);
+
+  --success: var(--color-devexp-emerald);
+  --success-foreground: var(--color-devexp-text);
+
+  --warning: var(--color-devexp-amber);
+  --warning-foreground: var(--color-devexp-bg);
+
+  --border: var(--color-devexp-border);
+  --ring: var(--color-devexp-primary);
+
+  --sidebar: var(--color-devexp-bg);
+  --sidebar-foreground: var(--color-devexp-text);
+  --sidebar-accent: var(--color-devexp-hover);
+  --sidebar-accent-foreground: var(--color-devexp-primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+@keyframes star-border-move {
+  to { background-position: 140% 0%, -40% 100%; }
+}
+
+.star-border-ring {
+  padding: 1px;
+  background-repeat: no-repeat;
+  background-size: 40% 100%, 40% 100%;
+  background-image:
+    linear-gradient(90deg, transparent, var(--color-brand-teal) 50%, transparent),
+    linear-gradient(90deg, transparent, var(--color-brand-blue) 50%, transparent);
+  background-position: -40% 0%, 140% 100%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-star-border-move { animation: star-border-move 9s linear infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ping { animation: none; }
+}

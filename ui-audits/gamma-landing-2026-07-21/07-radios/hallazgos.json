@@ -1,0 +1,28 @@
+{
+  "auditoria": "07-radios",
+  "proyecto": "gamma-landing",
+  "fecha": "2026-07-21",
+  "alcance": { "pantallas": 1, "archivos_revisados": 1 },
+  "resumen": "Un solo valor fuera de la escala nombrada de tokens.css, y es un caso justificado (asset de marca replicado a la fuente original) más que un descuido.",
+  "hallazgos": [
+    {
+      "id": "RAD-001",
+      "titulo": "El logo usa 7px arbitrario, fuera de la escala de 6 radios ya nombrada",
+      "severidad": "atencion",
+      "ubicaciones": [
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/brand-mark.tsx", "linea": 6 },
+        { "pantalla": "landing", "archivo": "src/pages/landing/components/brand-mark.tsx", "linea": 15 }
+      ],
+      "descripcion": "Las dos formas del logo usan rounded-[7px], un valor que no coincide con ningún token de la escala ya nombrada en tokens.css (radius-sm=5, radius-md=6, radius-lg=8...). Es intencional — replica el radio exacto del asset de marca original — pero al no estar documentado como excepción, un futuro cambio de escala no lo va a arrastrar ni va a ser obvio que es a propósito.",
+      "evidencia": "tokens.css define radius-sm:5px, radius-md:6px, radius-lg:8px, radius-xl:12px, radius-2xl:16px, radius-3xl:18px; brand-mark.tsx:6 y :15 usan rounded-[7px], que cae entre radius-md y radius-lg sin coincidir con ninguno",
+      "recomendacion": "Dejar el valor tal cual (es el radio real del logo, no un error) pero anclarlo a un token explícito --radius-brand-mark:7px en tokens.css con un comentario de una línea explicando que es una excepción de marca — así queda claro para cualquiera que lo revise después que no es un descuido",
+      "extra": {
+        "tipo_componente": "logo",
+        "valores": [
+          { "radio": "7px", "usos": 2, "pantallas": ["landing (nav, footer)"] }
+        ],
+        "escala_propuesta": null
+      }
+    }
+  ]
+}
