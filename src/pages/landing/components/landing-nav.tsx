@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { BrandMark, Button } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
@@ -11,9 +12,24 @@ const SECTIONS = [
 
 export function LandingNav() {
   const activeId = useActiveSection(SECTIONS.map((s) => s.id))
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 10)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/85 backdrop-blur-lg">
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-10 border-b transition-colors duration-300',
+        scrolled ? 'border-border bg-background/85 backdrop-blur-lg' : 'border-transparent bg-transparent',
+      )}
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center px-6 py-4">
         <Link to="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <BrandMark />
@@ -31,7 +47,12 @@ export function LandingNav() {
               {section.label}
             </a>
           ))}
-          <Button asChild size="lg">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white/25 text-white/70 hover:border-white hover:text-white"
+          >
             <Link to="/login">Ir a mi espacio</Link>
           </Button>
         </nav>

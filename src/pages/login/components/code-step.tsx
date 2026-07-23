@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { Link } from 'react-router'
-import { BrandMark, Button } from '@/shared/ui'
+import { Button } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 
 const CODE_LENGTH = 6
@@ -41,11 +40,7 @@ export function CodeStep({ email, onBack, onSubmit }: CodeStepProps) {
   }
 
   return (
-    <div className="flex w-full max-w-xs flex-col items-start text-left">
-      <Link to="/" className="mb-6 inline-flex">
-        <BrandMark />
-      </Link>
-
+    <div className="flex w-full flex-col items-center text-center">
       <p className="mb-4 text-sm text-muted-foreground">
         Ingresa el código de 6 dígitos enviado a
         <br />

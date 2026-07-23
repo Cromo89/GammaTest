@@ -14,8 +14,7 @@ const WORDS: Word[] = [
   { text: 'IA' },
   { text: 'a' },
   { text: 'una' },
-  { text: 'experiencia', gradient: true },
-  { text: 'compartida.', gradient: true },
+  { text: 'experiencia compartida.', gradient: true },
 ]
 
 export function HeroHeading() {
@@ -31,7 +30,7 @@ export function HeroHeading() {
   }, [])
 
   return (
-    <h1 className="mx-auto mt-6 max-w-3xl font-heading text-5xl font-semibold tracking-tight sm:text-6xl">
+    <h1 className="mx-auto mt-6 max-w-4xl font-heading text-6xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
       {WORDS.map((word, index) => (
         <span key={word.text + index} className="inline-block overflow-hidden pb-1">
           <span

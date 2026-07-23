@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Rocket, SlidersHorizontal, Sparkles, Upload, type LucideIcon } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
-import { FlowingColorBend } from '@/shared/ui'
 import { Reveal } from './reveal'
 
 interface Step {
@@ -58,9 +57,7 @@ function StepConnector() {
 
 export function LandingSteps() {
   return (
-    <section id="como-funciona" className="relative isolate overflow-hidden border-y border-border bg-muted/40">
-      <FlowingColorBend fadeEdge="top" showGrain={false} />
-
+    <section id="como-funciona" className="scroll-mt-24">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <Reveal className="mx-auto max-w-xl text-center">
           <h2 className="font-heading text-4xl font-semibold tracking-tight">

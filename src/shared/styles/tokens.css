@@ -94,6 +94,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
@@ -123,8 +129,14 @@ body {
   mask-composite: exclude;
 }
 
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .animate-star-border-move { animation: star-border-move 9s linear infinite; }
+  .animate-arrow-bounce { animation: arrow-bounce 1.8s ease-in-out infinite; }
 }
 
 @media (prefers-reduced-motion: reduce) {

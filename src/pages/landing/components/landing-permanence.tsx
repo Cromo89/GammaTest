@@ -47,7 +47,7 @@ const LEVELS: Level[] = [
 
 export function LandingPermanence() {
   return (
-    <section id="permanencia" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="permanencia" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <Reveal className="max-w-xl">
         <h2 className="font-heading text-4xl font-semibold tracking-tight">Tu proyecto madura en tres niveles</h2>
         <p className="mt-4 text-[15px] text-muted-foreground">

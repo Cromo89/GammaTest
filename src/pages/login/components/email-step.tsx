@@ -1,6 +1,5 @@
 import { Info } from 'lucide-react'
-import { Link } from 'react-router'
-import { BrandMark, Button } from '@/shared/ui'
+import { Button } from '@/shared/ui'
 
 interface EmailStepProps {
   email: string
@@ -10,11 +9,7 @@ interface EmailStepProps {
 
 export function EmailStep({ email, onEmailChange, onSubmit }: EmailStepProps) {
   return (
-    <div className="flex w-full max-w-xs flex-col items-start text-left">
-      <Link to="/" className="mb-6 inline-flex">
-        <BrandMark />
-      </Link>
-
+    <div className="flex w-full flex-col items-center text-center">
       <form
         className="w-full"
         onSubmit={(e) => {

@@ -40,7 +40,7 @@ export function LandingFormats() {
   const active = FORMATS[activeIndex]
 
   return (
-    <section id="formatos" className="mx-auto max-w-6xl px-6 py-24">
+    <section id="formatos" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <Reveal className="max-w-xl">
         <h2 className="font-heading text-4xl font-semibold tracking-tight">Tu stack, sin fricción.</h2>
         <p className="mt-4 text-[15px] text-muted-foreground">
