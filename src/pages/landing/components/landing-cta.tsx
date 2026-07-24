@@ -6,8 +6,8 @@ export function LandingCta() {
   return (
     <section className="relative isolate overflow-hidden px-6 pb-24">
       <Reveal blur className="mx-auto max-w-6xl rounded-3xl bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue p-px">
-        <div className="relative overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_50%_0%,color-mix(in_srgb,var(--color-brand-blue)_40%,transparent),transparent_65%),linear-gradient(var(--color-background),var(--color-background))] px-8 py-16 text-center">
-          <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
+        <div className="relative overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_50%_0%,color-mix(in_srgb,var(--color-brand-blue)_40%,transparent),transparent_65%),linear-gradient(var(--background),var(--background))] px-8 py-16 text-center">
+          <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase group-data-[theme=light]/landing:text-brand-blue">
             Empieza ahora
           </span>
           <h2 className="mx-auto mt-4 max-w-xl font-heading text-4xl font-semibold tracking-tight">
@@ -21,7 +21,7 @@ export function LandingCta() {
             asChild
             variant="outline"
             size="lg"
-            className="mt-8 border-white/25 text-white/70 hover:border-white hover:text-white"
+            className="mt-8 border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground"
           >
             <Link to="/login">Entrar a Gamma</Link>
           </Button>

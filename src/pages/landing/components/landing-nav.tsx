@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
+import { Moon, Sun } from 'lucide-react'
 import { BrandMark, Button } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 import { useActiveSection } from './use-active-section'
+import type { LandingTheme } from './use-landing-theme'
 
 const SECTIONS = [
   { id: 'como-funciona', label: 'Cómo funciona' },
@@ -10,7 +12,12 @@ const SECTIONS = [
   { id: 'permanencia', label: 'Permanencia' },
 ]
 
-export function LandingNav() {
+interface LandingNavProps {
+  theme: LandingTheme
+  onToggleTheme: () => void
+}
+
+export function LandingNav({ theme, onToggleTheme }: LandingNavProps) {
   const activeId = useActiveSection(SECTIONS.map((s) => s.id))
   const [scrolled, setScrolled] = useState(false)
 
@@ -47,11 +54,19 @@ export function LandingNav() {
               {section.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+            className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          </button>
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="border-white/25 text-white/70 hover:border-white hover:text-white"
+            className="border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground"
           >
             <Link to="/login">Ir a mi espacio</Link>
           </Button>

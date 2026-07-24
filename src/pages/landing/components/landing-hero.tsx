@@ -24,7 +24,7 @@ export function LandingHero() {
           asChild
           variant="outline"
           size="lg"
-          className="border-white/25 text-white/70 hover:border-white hover:text-white"
+          className="border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground"
         >
           <a href="#como-funciona">Descubrir cómo funciona</a>
         </Button>
