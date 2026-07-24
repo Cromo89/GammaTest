@@ -29,8 +29,6 @@
   --radius-xl: 12px;
   --radius-2xl: 16px;
   --radius-3xl: 18px;
-  /* Excepción de marca: radio propio del logo (brand-mark.tsx), fuera de la escala genérica a propósito */
-  --radius-brand-mark: 7px;
 
   --shadow-card: 0 40px 100px rgb(0 0 0 / 75%);
   --shadow-modal: 0 24px 60px rgb(0 0 0 / 50%);
