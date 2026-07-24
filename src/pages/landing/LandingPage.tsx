@@ -6,6 +6,7 @@ import { LandingFormats } from './components/landing-formats'
 import { LandingPermanence } from './components/landing-permanence'
 import { LandingCta } from './components/landing-cta'
 import { LandingFooter } from './components/landing-footer'
+import { ScrollToTop } from './components/scroll-to-top'
 
 export function LandingPage() {
   return (
@@ -20,6 +21,7 @@ export function LandingPage() {
         <LandingCta />
       </main>
       <LandingFooter />
+      <ScrollToTop />
     </div>
   )
 }
