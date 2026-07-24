@@ -83,7 +83,7 @@ function StepItem({ step, isActive, onSelect }: StepItemProps) {
       type="button"
       onClick={onSelect}
       className={cn(
-        'group flex w-full items-center gap-5 rounded-xl p-8 text-left transition-all duration-500 ease-out',
+        'group flex w-full items-center gap-5 rounded-xl p-5 text-left transition-all duration-500 ease-out',
         isActive ? 'translate-x-2 bg-muted/60' : 'hover:translate-x-1 hover:bg-muted/25',
       )}
     >
@@ -117,7 +117,7 @@ export function LandingSteps() {
 
   return (
     <section id="como-funciona" className="scroll-mt-24">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+      <div className="mx-auto max-w-6xl px-6 py-24 lg:py-0">
         <div
           ref={pinRef}
           className="relative"
@@ -133,10 +133,10 @@ export function LandingSteps() {
               </p>
             </Reveal>
 
-            <Reveal blur className="mt-16 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
+            <Reveal blur className="mt-6 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
               <div>
-                <div className="aspect-[4/3] w-full rounded-2xl bg-muted" />
-                <div key={current.n} className="animate-step-fade-in mt-8">
+                <div className="aspect-[21/9] w-full rounded-2xl bg-muted" />
+                <div key={current.n} className="animate-step-fade-in mt-6">
                   <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
                     Paso {current.n}
                   </span>
@@ -146,7 +146,7 @@ export function LandingSteps() {
                 </div>
               </div>
 
-              <div className="relative flex flex-col gap-10 pl-6">
+              <div className="relative flex flex-col gap-5 pl-6">
                 <div className="absolute top-0 bottom-0 left-0 w-px bg-border" />
                 <div
                   className="absolute top-0 left-0 w-px bg-brand-teal"
