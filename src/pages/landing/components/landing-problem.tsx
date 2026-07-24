@@ -27,8 +27,8 @@ const CHECKLIST: ChecklistItem[] = [
 
 export function LandingProblem() {
   return (
-    <section className="mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-      <Reveal className="max-w-xl">
+    <section className="mx-auto max-w-6xl px-6 py-24">
+      <Reveal blur className="mx-auto max-w-2xl text-center">
         <h2 className="font-heading text-4xl font-semibold tracking-tight">
           Crear es rápido.
           <br />
@@ -40,21 +40,19 @@ export function LandingProblem() {
           Una experiencia creada con IA no debería quedarse atrapada en tu computador, ni requerir días de
           configuración para ser compartida.
         </p>
-        <p className="mt-6 max-w-md border-l border-brand-teal py-2 pl-6 text-base text-foreground/85">
-          Gamma convierte un archivo en una URL segura y compartible dentro del ecosistema Cencosud.
-        </p>
       </Reveal>
 
-      <Reveal delay={150} className="flex flex-col gap-2.5">
+      <Reveal blur delay={150} className="mt-14 grid gap-4 sm:grid-cols-3">
         {CHECKLIST.map((item) => (
-          <div key={item.title} className="flex items-center gap-3 rounded-xl border border-border p-4">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10 text-brand-teal">
-              <item.icon className="size-4" />
+          <div
+            key={item.title}
+            className="flex flex-col items-center rounded-xl border border-border p-6 text-center"
+          >
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-teal/10 text-brand-teal">
+              <item.icon className="size-5" />
             </span>
-            <div>
-              <p className="text-sm font-semibold">{item.title}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{item.description}</p>
-            </div>
+            <p className="mt-4 text-sm font-semibold">{item.title}</p>
+            <p className="mt-1.5 text-xs text-muted-foreground">{item.description}</p>
           </div>
         ))}
       </Reveal>

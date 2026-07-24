@@ -30,7 +30,7 @@ export function LandingNav() {
         scrolled ? 'border-border bg-background/85 backdrop-blur-lg' : 'border-transparent bg-transparent',
       )}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center px-6 py-4">
+      <div className="flex w-full items-center px-8 py-4">
         <Link to="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <BrandMark />
         </Link>

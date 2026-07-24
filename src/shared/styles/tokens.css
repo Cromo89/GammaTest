@@ -111,32 +111,25 @@ body {
   outline-offset: 2px;
 }
 
-@keyframes star-border-move {
-  to { background-position: 140% 0%, -40% 100%; }
-}
-
-.star-border-ring {
-  padding: 1px;
-  background-repeat: no-repeat;
-  background-size: 40% 100%, 40% 100%;
-  background-image:
-    linear-gradient(90deg, transparent, var(--color-brand-teal) 50%, transparent),
-    linear-gradient(90deg, transparent, var(--color-brand-blue) 50%, transparent);
-  background-position: -40% 0%, 140% 100%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-
 @keyframes arrow-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(4px); }
 }
 
+@keyframes step-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes card-glow-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.25; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .animate-star-border-move { animation: star-border-move 9s linear infinite; }
   .animate-arrow-bounce { animation: arrow-bounce 1.8s ease-in-out infinite; }
+  .animate-step-fade-in { animation: step-fade-in 400ms ease-out; }
+  .animate-card-glow-pulse { animation: card-glow-pulse 5s ease-in-out infinite; }
 }
 
 @media (prefers-reduced-motion: reduce) {

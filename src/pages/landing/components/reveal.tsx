@@ -7,9 +7,10 @@ interface RevealProps {
   delay?: number
   style?: CSSProperties
   intensity?: 'default' | 'subtle'
+  blur?: boolean
 }
 
-export function Reveal({ children, className, delay = 0, style, intensity = 'default' }: RevealProps) {
+export function Reveal({ children, className, delay = 0, style, intensity = 'default', blur = false }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -43,10 +44,11 @@ export function Reveal({ children, className, delay = 0, style, intensity = 'def
         'ease-out',
         intensity === 'subtle' ? 'transition-all duration-1000' : 'transition-all duration-700',
         visible
-          ? 'translate-y-0 opacity-100'
+          ? 'translate-y-0 opacity-100 blur-none'
           : intensity === 'subtle'
             ? 'translate-y-2 opacity-0'
             : 'translate-y-6 opacity-0',
+        !visible && blur && 'blur-[8px]',
         className,
       )}
     >
