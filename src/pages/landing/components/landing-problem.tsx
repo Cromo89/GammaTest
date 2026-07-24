@@ -27,7 +27,7 @@ const CHECKLIST: ChecklistItem[] = [
 
 export function LandingProblem() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-24">
+    <section id="crear-es-rapido" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <Reveal blur className="mx-auto max-w-2xl text-center">
         <h2 className="font-heading text-4xl font-semibold tracking-tight">
           Crear es rápido.

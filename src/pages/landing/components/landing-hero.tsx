@@ -34,7 +34,7 @@ export function LandingHero() {
       </div>
 
       <a
-        href="#como-funciona"
+        href="#crear-es-rapido"
         aria-label="Ir a la siguiente sección"
         className="absolute bottom-20 left-1/2 flex size-11 -translate-x-1/2 items-center justify-center rounded-full border border-brand-teal/40 text-brand-teal transition-colors hover:border-brand-teal hover:bg-brand-teal/10"
       >
