@@ -98,21 +98,15 @@ function drawBand(ctx: CanvasRenderingContext2D, points: Point[], gradient: Canv
   ctx.lineCap = 'round'
   ctx.strokeStyle = gradient
 
-  ctx.save()
-  ctx.filter = 'blur(110px)'
-  ctx.globalAlpha = 0.32
+  ctx.globalAlpha = 0.55
   ctx.lineWidth = 240
   pathFor(ctx, points)
   ctx.stroke()
-  ctx.restore()
 
-  ctx.save()
-  ctx.filter = 'blur(60px)'
-  ctx.globalAlpha = 0.4
+  ctx.globalAlpha = 0.7
   ctx.lineWidth = 100
   pathFor(ctx, points)
   ctx.stroke()
-  ctx.restore()
 }
 
 function applyEdgeFade(ctx: CanvasRenderingContext2D, width: number, height: number, fadeEdge: FadeEdge) {
@@ -129,22 +123,37 @@ function applyEdgeFade(ctx: CanvasRenderingContext2D, width: number, height: num
   ctx.restore()
 }
 
-export function draw(
+// El trazo de color se dibuja nítido en su propio canvas; el desenfoque tipo "nube" se aplica
+// afuera con CSS (filter: blur en el elemento <canvas>), nunca con ctx.filter = 'blur(...)':
+// esa API de canvas no es confiable en WebKit/iOS (Safari y todos los navegadores en iOS,
+// Chrome incluido), donde el blur queda recortado o directamente no se aplica. El grano vive
+// en un canvas aparte, sin blur, para que los puntos se mantengan nítidos.
+export function drawBandLayer(
   ctx: CanvasRenderingContext2D,
   t: number,
   width: number,
   height: number,
-  mouse: Mouse,
   colors: string[],
   fadeEdge: FadeEdge,
-  showGrain: boolean,
-  grainHighlightIntensity: number,
 ) {
   ctx.clearRect(0, 0, width, height)
-  if (showGrain) drawGrain(ctx, width, height)
   const points = buildBandPoints(t, width, height)
   const gradient = buildGradient(ctx, points, colors)
   drawBand(ctx, points, gradient)
-  if (showGrain) drawGrainHighlight(ctx, width, height, mouse, colors[1], grainHighlightIntensity)
+  applyEdgeFade(ctx, width, height, fadeEdge)
+}
+
+export function drawGrainLayer(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  mouse: Mouse,
+  glowColor: string,
+  fadeEdge: FadeEdge,
+  grainHighlightIntensity: number,
+) {
+  ctx.clearRect(0, 0, width, height)
+  drawGrain(ctx, width, height)
+  drawGrainHighlight(ctx, width, height, mouse, glowColor, grainHighlightIntensity)
   applyEdgeFade(ctx, width, height, fadeEdge)
 }
