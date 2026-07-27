@@ -150,7 +150,7 @@ export function LandingSteps({ theme }: LandingStepsProps) {
 
   return (
     <section id="como-funciona" className="scroll-mt-24">
-      <div className="mx-auto max-w-6xl px-6 py-24 lg:py-0">
+      <div className="mx-auto max-w-6xl px-6 py-24 lg:py-0 3xl:max-w-[1600px]">
         <div
           ref={pinRef}
           className="relative"

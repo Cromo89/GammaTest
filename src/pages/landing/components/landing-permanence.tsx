@@ -92,7 +92,7 @@ function LevelCard({ level, delay }: LevelCardProps) {
 
 export function LandingPermanence() {
   return (
-    <section id="permanencia" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
+    <section id="permanencia" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24 3xl:max-w-[1600px]">
       <Reveal blur className="max-w-xl">
         <h2 className="font-heading text-[28px] leading-[1.05] font-semibold tracking-tight sm:text-4xl sm:leading-[2.5rem]">Tu proyecto madura en tres niveles</h2>
         <p className="mt-4 text-[15px] text-muted-foreground">

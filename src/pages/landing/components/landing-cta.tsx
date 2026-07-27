@@ -4,8 +4,8 @@ import { Reveal } from './reveal'
 
 export function LandingCta() {
   return (
-    <section className="relative isolate overflow-hidden px-6 pb-24">
-      <Reveal blur className="mx-auto max-w-6xl rounded-3xl bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue p-px">
+    <section className="relative isolate overflow-hidden px-6 py-24">
+      <Reveal blur className="mx-auto max-w-6xl rounded-3xl bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue p-px 3xl:max-w-[1600px]">
         <div className="relative overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_50%_0%,color-mix(in_srgb,var(--color-brand-blue)_40%,transparent),transparent_65%),linear-gradient(var(--background),var(--background))] px-8 py-16 text-center">
           <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase group-data-[theme=light]/landing:text-brand-blue">
             Empieza ahora
