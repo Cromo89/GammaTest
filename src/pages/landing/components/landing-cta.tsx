@@ -10,7 +10,7 @@ export function LandingCta() {
           <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase group-data-[theme=light]/landing:text-brand-blue">
             Empieza ahora
           </span>
-          <h2 className="mx-auto mt-4 max-w-xl font-heading text-[28px] font-semibold tracking-tight sm:text-4xl">
+          <h2 className="mx-auto mt-4 max-w-xl font-heading text-[28px] leading-[1.05] font-semibold tracking-tight sm:text-4xl sm:leading-[2.5rem]">
             Tu próxima idea puede estar online hoy.
           </h2>
           <p className="mx-auto mt-4 max-w-md text-[15px] text-foreground">
