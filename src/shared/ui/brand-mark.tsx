@@ -8,7 +8,7 @@ export function BrandMark() {
 
   return (
     <div className="flex items-center gap-2.5">
-      <svg width="30" height="30" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+      <svg width="40" height="40" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
         <g clipPath={`url(#${clip})`}>
           <path
             d="M42 84C18.843 84 0 65.157 0 42C0 18.843 18.843 0 42 0C47.7067 0 53.2461 1.12597 58.4645 3.35078L55.8929 9.3837C53.6894 14.5529 47.6193 16.7313 42 16.7313C28.0678 16.7313 16.7313 28.0678 16.7313 42C16.7313 55.9322 28.0678 67.2687 42 67.2687C53.0019 67.2687 62.385 60.2009 65.8443 50.3656H54.7313C45.4909 50.3656 38 42.8748 38 33.6344L75.6344 33.6344C80.2546 33.6344 84 37.3798 84 42C84 65.157 65.157 84 42 84Z"
