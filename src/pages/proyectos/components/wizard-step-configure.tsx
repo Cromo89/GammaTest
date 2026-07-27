@@ -1,6 +1,16 @@
 import { Shuffle } from 'lucide-react'
 import { slugify } from '@/shared/lib/utils'
 
+const ADJECTIVES = ['veloz', 'brillante', 'audaz', 'ágil', 'nítido', 'vívido', 'certero', 'fluido']
+const NOUNS = ['cometa', 'nebulosa', 'prisma', 'destello', 'vector', 'pulso', 'eco', 'zafiro']
+
+function randomName() {
+  const adjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
+  const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)]
+  const suffix = Math.floor(Math.random() * 90) + 10
+  return `${adjective}-${noun}-${suffix}`
+}
+
 interface WizardStepConfigureProps {
   name: string
   onNameChange: (value: string) => void
@@ -23,6 +33,9 @@ export function WizardStepConfigure({ name, onNameChange }: WizardStepConfigureP
         />
         <button
           type="button"
+          onClick={() => onNameChange(randomName())}
+          aria-label="Sugerir nombre aleatorio"
+          title="Sugerir nombre aleatorio"
           className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
         >
           <Shuffle className="size-4" />
