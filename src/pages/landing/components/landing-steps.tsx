@@ -165,7 +165,7 @@ export function LandingSteps() {
                 <div className="aspect-[21/9] w-full">
                   <img src={current.illustration} alt="" className="size-full object-contain" />
                 </div>
-                <div key={current.n} className="animate-step-fade-in mt-6">
+                <div key={current.n} className="animate-step-fade-in mt-10">
                   <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
                     Paso {current.n}
                   </span>
