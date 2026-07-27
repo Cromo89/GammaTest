@@ -160,7 +160,7 @@ export function LandingSteps() {
               </p>
             </Reveal>
 
-            <Reveal blur className="mt-6 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
+            <Reveal blur className="mt-12 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
               <div ref={infoRef} className="scroll-mt-24">
                 <div className="aspect-[21/9] w-full">
                   <img src={current.illustration} alt="" className="size-full object-contain" />
