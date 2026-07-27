@@ -1,62 +1,47 @@
-import { Link, NavLink } from 'react-router'
-import { LogOut, Sparkles } from 'lucide-react'
-import { Badge } from '@/shared/ui'
-import { navItems } from './nav-config'
+import { NavLink } from 'react-router'
+import { BrandMark } from '@/shared/ui'
+import { navGroups, type NavItem } from './nav-config'
 import { cn } from '@/shared/lib/utils'
 
-interface SidebarProps {
-  email: string
-  tier: string
+function NavLinkItem({ label, href, icon: Icon }: NavItem) {
+  return (
+    <NavLink
+      to={href}
+      className={({ isActive }) =>
+        cn(
+          'flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors',
+          isActive
+            ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+            : 'text-sidebar-foreground hover:bg-sidebar-accent/50',
+        )
+      }
+    >
+      <Icon className="size-4 shrink-0" />
+      {label}
+    </NavLink>
+  )
 }
 
-export function Sidebar({ email, tier }: SidebarProps) {
+export function Sidebar() {
   return (
-    <aside className="flex h-screen w-60 shrink-0 flex-col justify-between border-r border-sidebar-accent bg-sidebar px-3 py-4 text-sidebar-foreground">
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center gap-2 px-2">
-          <Sparkles className="size-5 text-primary" />
-          <span className="font-heading text-base font-semibold">Gamma</span>
-        </div>
-
-        <nav className="flex flex-col gap-1">
-          {navItems.map(({ label, href, icon: Icon }) => (
-            <NavLink
-              key={href}
-              to={href}
-              className={({ isActive }) =>
-                cn(
-                  'flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors',
-                  isActive
-                    ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                    : 'text-sidebar-foreground hover:bg-sidebar-accent/50',
-                )
-              }
-            >
-              <Icon className="size-4" />
-              {label}
-            </NavLink>
-          ))}
-        </nav>
+    <aside className="hidden h-screen w-60 shrink-0 flex-col gap-6 border-r border-sidebar-accent bg-sidebar px-3 py-4 text-sidebar-foreground lg:flex">
+      <div className="px-2">
+        <BrandMark />
       </div>
 
-      <div className="flex flex-col gap-2 px-2">
-        <span className="truncate text-xs text-muted-foreground">{email}</span>
-        <Badge variant="primary" className="w-fit capitalize">
-          {tier}
-        </Badge>
-        <select
-          className="rounded-lg border border-border bg-transparent px-2 py-1.5 text-sm text-sidebar-foreground"
-          defaultValue="es"
-        >
-          <option value="es">Español</option>
-        </select>
-        <Link
-          to="/login"
-          className="mt-2 flex items-center gap-2 rounded-lg px-2 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent/50"
-        >
-          <LogOut className="size-4" />
-          Cerrar sesión
-        </Link>
+      <div className="flex flex-col gap-5">
+        {navGroups.map((group) => (
+          <div key={group.label}>
+            <p className="px-2 pb-1.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground uppercase">
+              {group.label}
+            </p>
+            <nav className="flex flex-col gap-1">
+              {group.items.map((item) => (
+                <NavLinkItem key={item.href} {...item} />
+              ))}
+            </nav>
+          </div>
+        ))}
       </div>
     </aside>
   )

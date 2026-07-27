@@ -6,6 +6,7 @@ import { ProyectosPage } from '@/pages/proyectos/ProyectosPage'
 import { NuevoProyectoPage } from '@/pages/proyectos/NuevoProyectoPage'
 import { ProyectoDetallePage } from '@/pages/proyectos/ProyectoDetallePage'
 import { ConfiguracionPage } from '@/pages/configuracion/ConfiguracionPage'
+import { DocumentacionPage } from '@/pages/documentacion/DocumentacionPage'
 import { useUserTier } from '@/features/user-tier/use-user-tier'
 import type { Tier } from '@/data/user'
 
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       { path: 'proyectos/nuevo', element: <NuevoProyectoPage /> },
       { path: 'proyectos/:id', element: <ProyectoDetallePage /> },
       { path: 'configuracion', element: <ConfiguracionPage /> },
+      { path: 'documentacion', element: <DocumentacionPage /> },
     ],
   },
 ])

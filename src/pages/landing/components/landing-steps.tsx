@@ -89,7 +89,7 @@ function StepItem({ step, isActive, onSelect }: StepItemProps) {
     >
       <span
         className={cn(
-          'font-mono text-3xl font-bold transition-colors duration-500 ease-out',
+          'font-mono text-2xl font-bold transition-colors duration-500 ease-out lg:text-3xl',
           isActive
             ? 'bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-clip-text text-transparent'
             : 'text-muted-foreground/30 group-hover:text-muted-foreground/60',
@@ -99,7 +99,7 @@ function StepItem({ step, isActive, onSelect }: StepItemProps) {
       </span>
       <span
         className={cn(
-          'font-heading text-3xl font-semibold whitespace-nowrap uppercase transition-colors duration-500 ease-out',
+          'font-heading text-2xl font-semibold uppercase transition-colors duration-500 ease-out lg:text-3xl lg:whitespace-nowrap',
           isActive ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground/80',
         )}
       >
@@ -112,8 +112,14 @@ function StepItem({ step, isActive, onSelect }: StepItemProps) {
 export function LandingSteps() {
   const isDesktop = useIsDesktop()
   const { pinRef, active, progress, selectStep } = usePinnedSteps(STEPS.length, isDesktop)
+  const infoRef = useRef<HTMLDivElement>(null)
   const current = STEPS[active]
   const lineProgress = isDesktop ? progress : active / (STEPS.length - 1)
+
+  function handleSelect(index: number) {
+    selectStep(index)
+    if (!isDesktop) infoRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
     <section id="como-funciona" className="scroll-mt-24">
@@ -128,13 +134,13 @@ export function LandingSteps() {
               <h2 className="max-w-xl font-heading text-4xl font-semibold tracking-tight">
                 De la IA a producción en cuatro pasos
               </h2>
-              <p className="mt-4 text-[15px] whitespace-nowrap text-muted-foreground">
+              <p className="mt-4 text-[15px] text-muted-foreground lg:whitespace-nowrap">
                 Gamma elimina la distancia entre una buena idea y las personas que necesitan verla.
               </p>
             </Reveal>
 
             <Reveal blur className="mt-6 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
-              <div>
+              <div ref={infoRef} className="scroll-mt-24">
                 <div className="aspect-[21/9] w-full rounded-2xl bg-muted" />
                 <div key={current.n} className="animate-step-fade-in mt-6">
                   <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
@@ -157,7 +163,7 @@ export function LandingSteps() {
                     key={step.n}
                     step={step}
                     isActive={active === index}
-                    onSelect={() => selectStep(index)}
+                    onSelect={() => handleSelect(index)}
                   />
                 ))}
               </div>
