@@ -6,7 +6,7 @@ import { HeroHeading } from './hero-heading'
 export function LandingHero() {
   return (
     <section className="relative isolate flex min-h-dvh flex-col items-center overflow-hidden px-6 pt-24 pb-10 text-center">
-      <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.35} />
+      <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.35} speed={0.00006} />
 
       <div className="flex flex-1 flex-col items-center justify-center">
         <span className="font-mono text-xs font-medium tracking-[0.2em] text-[color:var(--hero-eyebrow-color)] uppercase">

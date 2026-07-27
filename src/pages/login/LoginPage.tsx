@@ -11,7 +11,7 @@ export function LoginPage() {
 
   return (
     <div className="relative isolate flex min-h-dvh items-center justify-center overflow-hidden px-4">
-      <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.5} speed={0.00016} />
+      <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.5} speed={0.00022} />
 
       <div className="relative flex w-full max-w-sm flex-col items-center">
         <Link to="/" className="mb-6 inline-flex">
