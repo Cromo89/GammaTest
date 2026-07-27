@@ -7,6 +7,7 @@ import { LandingPermanence } from './components/landing-permanence'
 import { LandingCta } from './components/landing-cta'
 import { LandingFooter } from './components/landing-footer'
 import { ScrollToTop } from './components/scroll-to-top'
+import { SmoothScroll } from './components/smooth-scroll'
 import { useLandingTheme } from './components/use-landing-theme'
 
 export function LandingPage() {
@@ -14,6 +15,7 @@ export function LandingPage() {
 
   return (
     <div className="group/landing bg-background text-foreground" data-theme={theme}>
+      <SmoothScroll />
       <LandingNav theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <LandingHero />
