@@ -30,7 +30,7 @@ export function HeroHeading() {
   }, [])
 
   return (
-    <h1 className="mx-auto mt-6 max-w-4xl font-heading text-5xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
+    <h1 className="mx-auto mt-6 max-w-4xl font-heading text-4xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
       {WORDS.map((word, index) => (
         <span key={word.text + index} className="inline-block overflow-hidden pb-1">
           <span
