@@ -70,17 +70,17 @@
 
 /* Tema claro — se activa vía [data-theme="light"], tanto en LandingPage como en el AppShell del dashboard */
 [data-theme='light'] {
-  --background: #f7f9fc;
+  --background: #eef1f5;
   --foreground: #0b1220;
 
-  --muted: rgb(10 20 35 / 4%);
+  --muted: rgb(10 20 35 / 6%);
   --muted-foreground: #5b6b7c;
 
-  --border: rgb(10 20 35 / 10%);
+  --border: rgb(10 20 35 / 12%);
 
-  --sidebar: #f7f9fc;
+  --sidebar: #eef1f5;
   --sidebar-foreground: #0b1220;
-  --sidebar-accent: rgb(10 20 35 / 4%);
+  --sidebar-accent: rgb(10 20 35 / 6%);
   --sidebar-accent-foreground: var(--color-devexp-primary);
 
   --hero-title-gradient: linear-gradient(to left, #1b4fc4, var(--color-devexp-violet), #0e8fae);
