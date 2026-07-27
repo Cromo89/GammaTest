@@ -1,13 +1,31 @@
 <svg width="526" height="228" viewBox="0 0 526 228" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  .s-float { animation: s-float 3.2s ease-in-out infinite; }
+  .s-float-b { animation-delay: .4s; }
+  .s-pulse { animation: s-pulse 2.6s ease-in-out infinite; transform-origin: 209px 104px; }
+  .s-dash { animation: s-dash 22s linear infinite; transform-origin: 209px 104px; }
+}
+@keyframes s-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes s-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes s-dash { to { transform: rotate(360deg); } }
+</style>
 <circle cx="209" cy="104" r="76" fill="#2DD4BF" fill-opacity="0.1"/>
-<circle cx="209" cy="104" r="74.9908" stroke="#2DD4BF" stroke-opacity="0.5" stroke-width="2.01835" stroke-dasharray="4.04 4.04"/>
+<circle class="s-dash" cx="209" cy="104" r="74.9908" stroke="#2DD4BF" stroke-opacity="0.5" stroke-width="2.01835" stroke-dasharray="4.04 4.04"/>
+<line x1="248.264" y1="137.575" x2="335.264" y2="191.575" stroke="white"/>
+<line x1="247.74" y1="88.5729" x2="336.418" y2="34.573" stroke="white"/>
+<g class="s-pulse">
 <path d="M219.37 132.039V125.9C219.37 122.643 218.076 119.52 215.774 117.218C213.471 114.915 210.348 113.622 207.092 113.622H188.674C185.418 113.622 182.295 114.915 179.992 117.218C177.69 119.52 176.396 122.643 176.396 125.9V132.039" stroke="white" stroke-width="3.02752" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M219.37 77.1797C222.003 77.8623 224.335 79.3998 225.999 81.5509C227.664 83.7021 228.567 86.3451 228.567 89.0651C228.567 91.7851 227.664 94.428 225.999 96.5792C224.335 98.7303 222.003 100.268 219.37 100.95" stroke="white" stroke-width="3.02752" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M237.787 132.039V125.9C237.785 123.18 236.88 120.537 235.213 118.387C233.546 116.237 231.213 114.701 228.579 114.021" stroke="white" stroke-width="3.02752" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M197.883 101.343C204.664 101.343 210.162 95.846 210.162 89.0649C210.162 82.2838 204.664 76.7866 197.883 76.7866C191.102 76.7866 185.605 82.2838 185.605 89.0649C185.605 95.846 191.102 101.343 197.883 101.343Z" stroke="white" stroke-width="3.02752" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="s-float">
 <path d="M363.01 220.636C372.299 220.636 379.829 213.106 379.829 203.817C379.829 194.527 372.299 186.997 363.01 186.997C353.72 186.997 346.19 194.527 346.19 203.817C346.19 213.106 353.72 220.636 363.01 220.636Z" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M356.282 203.817C356.282 197.554 358.691 191.532 363.01 186.997C367.328 191.532 369.737 197.554 369.737 203.817C369.737 210.079 367.328 216.101 363.01 220.636C358.691 216.101 356.282 210.079 356.282 203.817Z" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M346.19 203.816H379.829" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="s-float s-float-b">
 <path d="M355.608 7.448V14.344" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M369.401 7.448V14.344" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M374.573 10.896H350.437C348.532 10.896 346.989 12.4397 346.989 14.344V38.4801C346.989 40.3844 348.532 41.9281 350.437 41.9281H374.573C376.477 41.9281 378.021 40.3844 378.021 38.4801V14.344C378.021 12.4397 376.477 10.896 374.573 10.896Z" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
@@ -18,6 +36,5 @@
 <path d="M355.608 35.0322H355.626" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M362.504 35.0322H362.522" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M369.401 35.0322H369.418" stroke="#2DD4BF" stroke-width="2.01835" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="248.264" y1="137.575" x2="335.264" y2="191.575" stroke="white"/>
-<line x1="247.74" y1="88.5729" x2="336.418" y2="34.573" stroke="white"/>
+</g>
 </svg>
