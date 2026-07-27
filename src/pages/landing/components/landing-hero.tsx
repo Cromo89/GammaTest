@@ -20,16 +20,16 @@ export function LandingHero() {
           preocuparte por infraestructura.
         </p>
 
-        <div className="mt-8 flex items-center justify-center gap-2 sm:gap-3">
+        <div className="mt-8 flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center sm:justify-center">
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="border-foreground/25 px-4 text-foreground/70 hover:border-foreground hover:text-foreground sm:px-6"
+            className="w-full border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground sm:w-auto"
           >
             <a href="#como-funciona">Descubrir cómo funciona</a>
           </Button>
-          <Button asChild size="lg" className="px-4 sm:px-6">
+          <Button asChild size="lg" className="w-full sm:w-auto">
             <Link to="/login">Comenzar a publicar</Link>
           </Button>
         </div>
