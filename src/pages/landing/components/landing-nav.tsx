@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { Menu, Moon, Sun, X } from 'lucide-react'
 import { BrandMark, Button } from '@/shared/ui'
@@ -87,55 +87,57 @@ export function LandingNav({ theme, onToggleTheme }: LandingNavProps) {
   }, [])
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-10 border-b transition-colors duration-300',
-        scrolled ? 'border-border bg-background/85 backdrop-blur-lg' : 'border-transparent bg-transparent',
-      )}
-    >
-      <div className="flex w-full items-center px-6 py-4 sm:px-8">
-        <Link to="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <BrandMark />
-        </Link>
-        <nav className="ml-auto flex items-center gap-7">
-          {SECTIONS.map((section) => (
-            <a
-              key={section.id}
-              href={`#${section.id}`}
-              className={cn(
-                'hidden text-xs transition-colors sm:block',
-                activeId === section.id ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground',
-              )}
+    <Fragment>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-10 border-b transition-colors duration-300',
+          scrolled ? 'border-border bg-background/85 backdrop-blur-lg' : 'border-transparent bg-transparent',
+        )}
+      >
+        <div className="flex w-full items-center px-6 py-4 sm:px-8">
+          <Link to="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <BrandMark />
+          </Link>
+          <nav className="ml-auto flex items-center gap-7">
+            {SECTIONS.map((section) => (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className={cn(
+                  'hidden text-xs transition-colors sm:block',
+                  activeId === section.id ? 'font-medium text-foreground' : 'text-muted-foreground hover:text-foreground',
+                )}
+              >
+                {section.label}
+              </a>
+            ))}
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+              className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
-              {section.label}
-            </a>
-          ))}
-          <button
-            type="button"
-            onClick={onToggleTheme}
-            aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
-            className="flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          >
-            {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
-          </button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="hidden border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground sm:inline-flex"
-          >
-            <Link to="/login">Ir a mi espacio</Link>
-          </Button>
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Abrir menú"
-            className="flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:hidden"
-          >
-            <Menu className="size-5" />
-          </button>
-        </nav>
-      </div>
+              {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+            </button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="hidden border-foreground/25 text-foreground/70 hover:border-foreground hover:text-foreground sm:inline-flex"
+            >
+              <Link to="/login">Ir a mi espacio</Link>
+            </Button>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Abrir menú"
+              className="flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:hidden"
+            >
+              <Menu className="size-5" />
+            </button>
+          </nav>
+        </div>
+      </header>
 
       {menuOpen && (
         <MobileMenu
@@ -145,6 +147,6 @@ export function LandingNav({ theme, onToggleTheme }: LandingNavProps) {
           onClose={() => setMenuOpen(false)}
         />
       )}
-    </header>
+    </Fragment>
   )
 }
