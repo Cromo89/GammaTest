@@ -132,6 +132,15 @@ body {
   outline-offset: 2px;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes arrow-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(4px); }
