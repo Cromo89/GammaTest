@@ -65,7 +65,7 @@
   --sidebar-accent-foreground: var(--color-devexp-primary);
 }
 
-/* Tema claro exclusivo del landing — se activa vía [data-theme="light"] en LandingPage; el dashboard interno nunca lo usa */
+/* Tema claro — se activa vía [data-theme="light"], tanto en LandingPage como en el AppShell del dashboard */
 [data-theme='light'] {
   --background: #f7f9fc;
   --foreground: #0b1220;
@@ -74,6 +74,11 @@
   --muted-foreground: #5b6b7c;
 
   --border: rgb(10 20 35 / 10%);
+
+  --sidebar: #f7f9fc;
+  --sidebar-foreground: #0b1220;
+  --sidebar-accent: rgb(10 20 35 / 4%);
+  --sidebar-accent-foreground: var(--color-devexp-primary);
 }
 
 @theme inline {

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router'
-import { Bell, ChevronDown, LogOut, Search } from 'lucide-react'
+import { Bell, ChevronDown, LogOut, Moon, Search, Sun } from 'lucide-react'
 import {
   Badge,
   DropdownMenu,
@@ -11,12 +11,28 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui'
 import { getInitials, NOTIFICATIONS } from './topbar-data'
+import type { DashboardTheme } from './use-dashboard-theme'
 
 interface TopbarProps {
   value: string
   onChange: (value: string) => void
   email: string
   tier: string
+  theme: DashboardTheme
+  onToggleTheme: () => void
+}
+
+function ThemeToggle({ theme, onToggleTheme }: { theme: DashboardTheme; onToggleTheme: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggleTheme}
+      aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+      className="flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+    >
+      {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+    </button>
+  )
 }
 
 function NotificationsMenu() {
@@ -83,7 +99,7 @@ function ProfileMenu({ email, tier }: ProfileMenuProps) {
   )
 }
 
-export function Topbar({ value, onChange, email, tier }: TopbarProps) {
+export function Topbar({ value, onChange, email, tier, theme, onToggleTheme }: TopbarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -115,6 +131,7 @@ export function Topbar({ value, onChange, email, tier }: TopbarProps) {
 
       <div className="ml-auto flex items-center gap-3">
         <NotificationsMenu />
+        <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
 
         <div className="relative">
           <select

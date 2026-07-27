@@ -1,16 +1,19 @@
 import { useState, type ReactNode } from 'react'
 import { Link, NavLink } from 'react-router'
-import { Bell, ChevronDown, LogOut, Menu, Search, X } from 'lucide-react'
+import { Bell, ChevronDown, LogOut, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { Badge, BrandMark } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 import { navGroups } from './nav-config'
 import { getInitials, NOTIFICATIONS } from './topbar-data'
+import type { DashboardTheme } from './use-dashboard-theme'
 
 interface MobileNavProps {
   value: string
   onChange: (value: string) => void
   email: string
   tier: string
+  theme: DashboardTheme
+  onToggleTheme: () => void
 }
 
 interface MobileNavGroupsProps {
@@ -168,7 +171,7 @@ function MenuOverlay({ value, onChange, email, tier, onClose }: MenuOverlayProps
   )
 }
 
-export function MobileNav({ value, onChange, email, tier }: MobileNavProps) {
+export function MobileNav({ value, onChange, email, tier, theme, onToggleTheme }: MobileNavProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
 
@@ -185,6 +188,14 @@ export function MobileNav({ value, onChange, email, tier }: MobileNavProps) {
           >
             <Bell className="size-5" />
             <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-primary" />
+          </button>
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+            className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            {theme === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </button>
           <button
             type="button"
