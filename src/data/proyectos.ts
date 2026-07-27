@@ -1,5 +1,5 @@
 export type ProjectStatus = 'online' | 'offline'
-export type ProjectType = 'HTML' | 'Next.js'
+export type ProjectType = 'HTML' | 'React/Vite' | 'Next.js'
 
 export interface Deploy {
   id: string
@@ -128,6 +128,32 @@ export const proyectos: Proyecto[] = [
     hoursRemaining: 168,
     deploys: [
       { id: 'd1', hash: 'a7b8c9d0', status: 'online', isCurrent: true, type: 'Next.js', version: 'v4', relativeLabel: 'hace 5 días', expiresAtLabel: '29/7/2026, 14:40:00 p.m.', ttlPercent: 30 },
+    ],
+  },
+  {
+    id: 'c3d4e5f6',
+    name: 'Panel de configuración interno',
+    type: 'React/Vite',
+    status: 'online',
+    url: 'panel-configuracion-interno.gamma.pulsar.codes',
+    owner: 'Claudio Romo',
+    lastPublishedAt: '2026-07-26T10:15:00',
+    hoursRemaining: 168,
+    deploys: [
+      { id: 'd1', hash: 'b8c9d0e1', status: 'online', isCurrent: true, type: 'React/Vite', version: 'v1', relativeLabel: 'hace 1 día', expiresAtLabel: '2/8/2026, 10:15:00 a.m.', ttlPercent: 88 },
+    ],
+  },
+  {
+    id: 'd4e5f6a7',
+    name: 'Explorador de componentes UI',
+    type: 'React/Vite',
+    status: 'online',
+    url: 'explorador-componentes-ui.gamma.pulsar.codes',
+    owner: 'David Andrés',
+    lastPublishedAt: '2026-07-20T16:50:00',
+    hoursRemaining: 720,
+    deploys: [
+      { id: 'd1', hash: 'c9d0e1f2', status: 'online', isCurrent: true, type: 'React/Vite', version: 'v2', relativeLabel: 'hace 7 días', expiresAtLabel: '19/8/2026, 16:50:00 p.m.', ttlPercent: 78 },
     ],
   },
 ]

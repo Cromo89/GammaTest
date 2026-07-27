@@ -6,6 +6,7 @@ export function ProjectStats({ proyectos }: { proyectos: Proyecto[] }) {
   const totalDeploys = proyectos.reduce((sum, proyecto) => sum + proyecto.deploys.length, 0)
   const onlineCount = proyectos.filter((proyecto) => proyecto.status === 'online').length
   const htmlCount = proyectos.filter((proyecto) => proyecto.type === 'HTML').length
+  const reactCount = proyectos.filter((proyecto) => proyecto.type === 'React/Vite').length
   const nextCount = proyectos.filter((proyecto) => proyecto.type === 'Next.js').length
 
   return (
@@ -14,7 +15,7 @@ export function ProjectStats({ proyectos }: { proyectos: Proyecto[] }) {
         icon={LayoutGrid}
         label="Proyectos activos"
         value={proyectos.length}
-        hint={`${htmlCount} HTML, ${nextCount} Next.js`}
+        hint={`${htmlCount} HTML, ${reactCount} React/Vite, ${nextCount} Next.js`}
       />
       <StatCard
         icon={Rocket}

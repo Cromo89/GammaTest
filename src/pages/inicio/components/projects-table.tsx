@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router'
-import { Code2, Layers } from 'lucide-react'
+import { Atom, Code2, Layers } from 'lucide-react'
 import { cn, formatDateTime } from '@/shared/lib/utils'
 import type { Proyecto, ProjectType } from '@/data/proyectos'
 
 const TYPE_ICON: Record<ProjectType, typeof Code2> = {
   HTML: Code2,
+  'React/Vite': Atom,
   'Next.js': Layers,
 }
 
 const TYPE_COLOR: Record<ProjectType, string> = {
   HTML: 'bg-amber-500/10 text-amber-500',
+  'React/Vite': 'bg-sky-500/10 text-sky-500',
   'Next.js': 'bg-devexp-violet/10 text-devexp-violet',
 }
 

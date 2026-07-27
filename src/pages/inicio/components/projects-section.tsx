@@ -5,7 +5,7 @@ import type { Proyecto, ProjectType } from '@/data/proyectos'
 import { ProjectCard } from '../../proyectos/components/project-card'
 import { ProjectsTable } from './projects-table'
 
-const TYPES: ProjectType[] = ['HTML', 'Next.js']
+const TYPES: ProjectType[] = ['HTML', 'React/Vite', 'Next.js']
 
 function FilterButton({ active, onClick, children }: { active: boolean; onClick: () => void; children: ReactNode }) {
   return (
