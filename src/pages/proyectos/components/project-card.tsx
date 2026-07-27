@@ -9,7 +9,7 @@ export function ProjectCard({ proyecto }: { proyecto: Proyecto }) {
   return (
     <Link
       to={`/proyectos/${proyecto.id}`}
-      className="block w-72 rounded-xl border border-border p-4 transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_8px_24px_rgb(29_158_117_/_15%)]"
+      className="block w-full rounded-xl border border-border p-4 transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-card-hover sm:w-72"
     >
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2">

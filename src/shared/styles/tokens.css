@@ -32,6 +32,7 @@
 
   --shadow-card: 0 40px 100px rgb(0 0 0 / 75%);
   --shadow-modal: 0 24px 60px rgb(0 0 0 / 50%);
+  --shadow-card-hover: 0 8px 24px var(--color-devexp-primary-dim);
 
   --ease-spring: cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }

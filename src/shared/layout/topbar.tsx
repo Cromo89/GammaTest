@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router'
-import { Bell, LogOut, Search } from 'lucide-react'
+import { Bell, ChevronDown, LogOut, Search } from 'lucide-react'
 import {
   Badge,
   DropdownMenu,
@@ -116,12 +116,15 @@ export function Topbar({ value, onChange, email, tier }: TopbarProps) {
       <div className="ml-auto flex items-center gap-3">
         <NotificationsMenu />
 
-        <select
-          className="h-9 rounded-lg border border-border bg-transparent px-2 text-sm text-foreground"
-          defaultValue="es"
-        >
-          <option value="es">Español</option>
-        </select>
+        <div className="relative">
+          <select
+            className="h-9 appearance-none rounded-lg border border-border bg-transparent py-2 pr-8 pl-2 text-sm text-foreground"
+            defaultValue="es"
+          >
+            <option value="es">Español</option>
+          </select>
+          <ChevronDown className="pointer-events-none absolute top-1/2 right-2 size-4 -translate-y-1/2 text-muted-foreground" />
+        </div>
 
         <ProfileMenu email={email} tier={tier} />
       </div>
