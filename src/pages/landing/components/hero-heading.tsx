@@ -30,19 +30,22 @@ export function HeroHeading() {
   }, [])
 
   return (
-    <h1 className="mx-auto mt-6 max-w-4xl text-balance font-heading text-2xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
+    <h1 className="mx-auto mt-6 max-w-4xl text-balance font-heading text-4xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
       {WORDS.map((word, index) => (
-        <span key={word.text + index} className="inline-block overflow-hidden pb-1">
-          <span
-            style={{ transitionDelay: `${index * 55}ms` }}
-            className={cn(
-              'mr-[0.28em] inline-block transition-all duration-500 ease-out',
-              word.gradient && 'bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-clip-text text-transparent',
-              mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
-            )}
-          >
-            {word.text}
+        <span key={word.text + index}>
+          <span className="inline-block overflow-hidden pb-1">
+            <span
+              style={{ transitionDelay: `${index * 55}ms` }}
+              className={cn(
+                'mr-[0.28em] inline-block transition-all duration-500 ease-out',
+                word.gradient && 'bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-clip-text text-transparent',
+                mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
+              )}
+            >
+              {word.text}
+            </span>
           </span>
+          {(index === 2 || index === 6) && <br className="sm:hidden" />}
         </span>
       ))}
     </h1>
