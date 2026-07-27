@@ -64,7 +64,7 @@ export function GuidedTour({ steps, targetRefs, onClose }: GuidedTourProps) {
         className="absolute inset-0 bg-black/60"
       />
       <div
-        className="pointer-events-none absolute rounded-lg ring-2 ring-primary transition-all duration-300"
+        className="pointer-events-none absolute rounded-lg bg-primary/15 ring-2 ring-primary transition-all duration-300"
         style={{ top: rect.top - 4, left: rect.left - 4, width: rect.width + 8, height: rect.height + 8 }}
       />
       <div
