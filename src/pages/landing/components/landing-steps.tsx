@@ -6,13 +6,34 @@ interface Step {
   n: string
   title: string
   description: string
+  illustration: string
 }
 
 const STEPS: Step[] = [
-  { n: '01', title: 'Crea con IA', description: 'Genera tu sitio, prototipo o herramienta con tu asistente favorito.' },
-  { n: '02', title: 'Sube el código', description: 'Carga un .zip con HTML, React/Vite o Next.js.' },
-  { n: '03', title: 'Define su alcance', description: 'Elige permanencia, dominio y colaboradores.' },
-  { n: '04', title: 'Publica y comparte', description: 'Obtén una URL lista para validar con tu equipo.' },
+  {
+    n: '01',
+    title: 'Crea con IA',
+    description: 'Genera tu sitio, prototipo o herramienta con tu asistente favorito.',
+    illustration: '/steps/gamma-step1.svg',
+  },
+  {
+    n: '02',
+    title: 'Sube el código',
+    description: 'Carga un .zip con HTML, React/Vite o Next.js.',
+    illustration: '/steps/gamma-step2.svg',
+  },
+  {
+    n: '03',
+    title: 'Define su alcance',
+    description: 'Elige permanencia, dominio y colaboradores.',
+    illustration: '/steps/gamma-step3.svg',
+  },
+  {
+    n: '04',
+    title: 'Publica y comparte',
+    description: 'Obtén una URL lista para validar con tu equipo.',
+    illustration: '/steps/gamma-step4.svg',
+  },
 ]
 
 function useIsDesktop() {
@@ -141,7 +162,9 @@ export function LandingSteps() {
 
             <Reveal blur className="mt-6 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
               <div ref={infoRef} className="scroll-mt-24">
-                <div className="aspect-[21/9] w-full rounded-2xl bg-muted" />
+                <div className="aspect-[21/9] w-full">
+                  <img src={current.illustration} alt="" className="size-full object-contain" />
+                </div>
                 <div key={current.n} className="animate-step-fade-in mt-6">
                   <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
                     Paso {current.n}
