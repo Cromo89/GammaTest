@@ -18,7 +18,7 @@ export function LandingPage() {
       <main>
         <LandingHero />
         <LandingProblem />
-        <LandingSteps />
+        <LandingSteps theme={theme} />
         <LandingFormats />
         <LandingPermanence />
         <LandingCta />

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/shared/lib/utils'
 import { Reveal } from './reveal'
+import type { LandingTheme } from './use-landing-theme'
 
 interface Step {
   n: string
@@ -14,25 +15,25 @@ const STEPS: Step[] = [
     n: '01',
     title: 'Crea con IA',
     description: 'Genera tu sitio, prototipo o herramienta con tu asistente favorito.',
-    illustration: '/steps/gamma-step1.svg',
+    illustration: 'gamma-step1',
   },
   {
     n: '02',
     title: 'Sube el código',
     description: 'Carga un .zip con HTML, React/Vite o Next.js.',
-    illustration: '/steps/gamma-step2.svg',
+    illustration: 'gamma-step2',
   },
   {
     n: '03',
     title: 'Define su alcance',
     description: 'Elige permanencia, dominio y colaboradores.',
-    illustration: '/steps/gamma-step3.svg',
+    illustration: 'gamma-step3',
   },
   {
     n: '04',
     title: 'Publica y comparte',
     description: 'Obtén una URL lista para validar con tu equipo.',
-    illustration: '/steps/gamma-step4.svg',
+    illustration: 'gamma-step4',
   },
 ]
 
@@ -130,12 +131,17 @@ function StepItem({ step, isActive, onSelect }: StepItemProps) {
   )
 }
 
-export function LandingSteps() {
+interface LandingStepsProps {
+  theme: LandingTheme
+}
+
+export function LandingSteps({ theme }: LandingStepsProps) {
   const isDesktop = useIsDesktop()
   const { pinRef, active, progress, selectStep } = usePinnedSteps(STEPS.length, isDesktop)
   const infoRef = useRef<HTMLDivElement>(null)
   const current = STEPS[active]
   const lineProgress = isDesktop ? progress : active / (STEPS.length - 1)
+  const illustrationSrc = `/steps/${current.illustration}${theme === 'light' ? '-light' : ''}.svg`
 
   function handleSelect(index: number) {
     selectStep(index)
@@ -163,7 +169,7 @@ export function LandingSteps() {
             <Reveal blur className="mt-12 grid w-full gap-12 lg:grid-cols-2 lg:gap-16">
               <div ref={infoRef} className="scroll-mt-24">
                 <div className="aspect-[21/9] w-full">
-                  <img src={current.illustration} alt="" className="size-full object-contain" />
+                  <img src={illustrationSrc} alt="" className="size-full object-contain" />
                 </div>
                 <div key={current.n} className="animate-step-fade-in mt-10">
                   <span className="font-mono text-xs font-medium tracking-[0.2em] text-brand-teal uppercase">
