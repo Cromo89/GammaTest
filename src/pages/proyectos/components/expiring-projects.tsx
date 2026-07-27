@@ -19,7 +19,7 @@ export function ExpiringProjects({ proyectos, showOwner = false }: ExpiringProje
   return (
     <div className="mb-8 rounded-xl border border-warning/30 bg-warning/5 p-4">
       <div className="flex items-center gap-2">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-warning/10 text-warning">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-warning text-background">
           <Clock className="size-4" />
         </span>
         <div>
