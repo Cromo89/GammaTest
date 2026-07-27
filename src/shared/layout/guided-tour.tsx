@@ -57,15 +57,16 @@ export function GuidedTour({ steps, targetRefs, onClose }: GuidedTourProps) {
 
   return (
     <div className="fixed inset-0 z-50">
-      <button
-        type="button"
-        aria-label="Cerrar navegación guiada"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/60"
-      />
+      <button type="button" aria-label="Cerrar navegación guiada" onClick={onClose} className="absolute inset-0" />
       <div
-        className="pointer-events-none absolute rounded-lg bg-primary/15 ring-2 ring-primary transition-all duration-300"
-        style={{ top: rect.top - 4, left: rect.left - 4, width: rect.width + 8, height: rect.height + 8 }}
+        className="pointer-events-none absolute rounded-lg ring-2 ring-primary transition-all duration-300"
+        style={{
+          top: rect.top - 4,
+          left: rect.left - 4,
+          width: rect.width + 8,
+          height: rect.height + 8,
+          boxShadow: '0 0 0 9999px rgb(0 0 0 / 60%)',
+        }}
       />
       <div
         className="animate-step-fade-in absolute w-72 rounded-xl border border-border bg-background p-4 shadow-modal"
