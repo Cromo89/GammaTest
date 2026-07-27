@@ -1,10 +1,11 @@
-import type { ReactNode } from 'react'
-import { useParams } from 'react-router'
-import { Code2, Copy, ExternalLink, Globe, Trash2, Upload } from 'lucide-react'
+import { useRef, useState, type ReactNode } from 'react'
+import { useNavigate, useParams } from 'react-router'
+import { Check, Code2, Copy, ExternalLink, Globe, Upload } from 'lucide-react'
 import { Button, Dropzone } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 import { proyectos } from '@/data/proyectos'
-import { DeployItem } from './components/deploy-item'
+import { DeployHistoryTable } from './components/deploy-history-table'
+import { DeleteProjectDialog } from './components/delete-project-dialog'
 
 function Pill({ children, dot }: { children: ReactNode; dot?: 'online' | 'offline' }) {
   return (
@@ -17,9 +18,24 @@ function Pill({ children, dot }: { children: ReactNode; dot?: 'online' | 'offlin
 
 export function ProyectoDetallePage() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const proyecto = proyectos.find((p) => p.id === id)
+  const dropzoneRef = useRef<HTMLDivElement>(null)
+  const [copied, setCopied] = useState(false)
 
   if (!proyecto) return <p className="text-sm text-muted-foreground">Proyecto no encontrado.</p>
+
+  function handleCopyUrl() {
+    if (!proyecto) return
+    navigator.clipboard.writeText(`https://${proyecto.url}`)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  function handleDelete() {
+    if (!proyecto) return
+    navigate('/proyectos', { state: { toast: `"${proyecto.name}" fue eliminado.` } })
+  }
 
   return (
     <div className="flex max-w-3xl flex-col gap-6">
@@ -34,13 +50,11 @@ export function ProyectoDetallePage() {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <Button>
+          <Button onClick={() => dropzoneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
             <Upload className="size-4" />
-            Deploy
+            Publicar nueva versión
           </Button>
-          <Button variant="ghost" className="text-destructive hover:bg-destructive/10">
-            <Trash2 className="size-4" />
-          </Button>
+          <DeleteProjectDialog projectName={proyecto.name} onConfirm={handleDelete} />
         </div>
       </div>
 
@@ -50,13 +64,15 @@ export function ProyectoDetallePage() {
           {proyecto.url}
         </span>
         <div className="flex shrink-0 gap-2">
-          <Button variant="outline">
-            <Copy className="size-4" />
-            Copiar
+          <Button variant="outline" onClick={handleCopyUrl}>
+            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+            {copied ? 'Copiado' : 'Copiar'}
           </Button>
-          <Button>
-            <ExternalLink className="size-4" />
-            Visitar
+          <Button asChild>
+            <a href={`https://${proyecto.url}`} target="_blank" rel="noreferrer">
+              <ExternalLink className="size-4" />
+              Visitar
+            </a>
           </Button>
         </div>
       </div>
@@ -70,16 +86,11 @@ export function ProyectoDetallePage() {
         <Pill>{proyecto.type}</Pill>
       </div>
 
-      <Dropzone title="Arrastra un .zip, .html o carpeta para deployar" />
-
-      <div>
-        <p className="mb-2 text-xs font-mono text-muted-foreground uppercase">Deploys</p>
-        <div className="flex flex-col gap-3">
-          {proyecto.deploys.map((deploy) => (
-            <DeployItem key={deploy.id} deploy={deploy} />
-          ))}
-        </div>
+      <div ref={dropzoneRef}>
+        <Dropzone title="Arrastra un .zip, .html o carpeta para deployar" />
       </div>
+
+      <DeployHistoryTable deploys={proyecto.deploys} />
     </div>
   )
 }

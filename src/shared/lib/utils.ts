@@ -16,6 +16,12 @@ export function slugify(value: string) {
   return withoutDiacritics.replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 }
 
+export function getFirstName(email: string) {
+  const [local] = email.split('@')
+  const [first] = local.split(/[._-]/)
+  return first ? first.charAt(0).toUpperCase() + first.slice(1) : ''
+}
+
 export function formatDateTime(isoDate: string) {
   return new Date(isoDate).toLocaleString('es-CL', {
     day: 'numeric',

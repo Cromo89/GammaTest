@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useOutletContext } from 'react-router'
-import { Badge, Button, Card, OptionCard, Textarea } from '@/shared/ui'
+import { ChevronDown } from 'lucide-react'
+import { Badge, Button, Card, Textarea } from '@/shared/ui'
 import { tierInfo, requestableTiers } from '@/data/tiers'
 import type { Tier } from '@/data/user'
 
@@ -8,17 +9,13 @@ const MIN_MOTIVO_LENGTH = 10
 
 interface ShellContext {
   tier: string
-  onTierChange: (tier: string) => void
 }
 
 export function ConfiguracionPage() {
-  const { tier, onTierChange } = useOutletContext<ShellContext>()
-  const pendingRequestOptions = tierInfo.filter((option) => option.id !== tier)
+  const { tier } = useOutletContext<ShellContext>()
+  const currentTierInfo = tierInfo.find((option) => option.id === tier) ?? tierInfo[0]
   const [requestedTier, setRequestedTier] = useState<Tier>(requestableTiers[0].id)
   const [motivo, setMotivo] = useState('')
-  const selectedRequestTier = pendingRequestOptions.some((option) => option.id === requestedTier)
-    ? requestedTier
-    : pendingRequestOptions[0]?.id
 
   return (
     <div className="flex max-w-2xl flex-col gap-6">
@@ -26,22 +23,13 @@ export function ConfiguracionPage() {
 
       <Card>
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-medium">Tu tier</h2>
-          <Badge className="capitalize">{tier}</Badge>
+          <h2 className="font-medium">Tu tier actual</h2>
+          <Badge className="capitalize">{currentTierInfo.label}</Badge>
         </div>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Default tier. Deployments live 7 days by default, then stop.
-        </p>
-        <div className="flex gap-3">
-          {tierInfo.map((option) => (
-            <OptionCard
-              key={option.id}
-              title={option.label}
-              subtitle={option.limit}
-              selected={option.id === tier}
-              onClick={() => onTierChange(option.id)}
-            />
-          ))}
+        <p className="text-sm text-muted-foreground">{currentTierInfo.description}</p>
+        <div className="mt-4 flex items-center justify-between rounded-lg border border-border px-3 py-2 text-sm">
+          <span className="text-muted-foreground">Permanencia de deploys</span>
+          <span className="font-medium capitalize">{currentTierInfo.limit}</span>
         </div>
       </Card>
 
@@ -52,17 +40,19 @@ export function ConfiguracionPage() {
         </p>
 
         <label className="mb-2 block text-xs font-mono text-muted-foreground uppercase">Tier solicitado</label>
-        <div className="mb-4 flex gap-3">
-          {pendingRequestOptions.map((option) => (
-            <OptionCard
-              key={option.id}
-              layout="inline"
-              title={option.label}
-              subtitle={option.limit}
-              selected={option.id === selectedRequestTier}
-              onClick={() => setRequestedTier(option.id)}
-            />
-          ))}
+        <div className="relative mb-4">
+          <select
+            value={requestedTier}
+            onChange={(e) => setRequestedTier(e.target.value as Tier)}
+            className="h-10 w-full appearance-none rounded-lg border border-border bg-transparent py-2 pr-9 pl-3 text-sm capitalize text-foreground focus:border-primary focus:outline-none"
+          >
+            {requestableTiers.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label} — {option.limit}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" />
         </div>
 
         <label className="mb-2 block text-xs font-mono text-muted-foreground uppercase">Motivo</label>

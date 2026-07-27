@@ -1,28 +1,50 @@
-import { Link, useOutletContext } from 'react-router'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useOutletContext } from 'react-router'
 import { Folder, Plus } from 'lucide-react'
 import { Button } from '@/shared/ui'
+import { getFirstName } from '@/shared/lib/utils'
 import { proyectos } from '@/data/proyectos'
 import { ProjectCard } from './components/project-card'
+import { NewProjectCard } from './components/new-project-card'
+import { StatCard } from './components/stat-card'
+import { PublishToast } from './components/publish-toast'
 
 interface ShellContext {
   searchQuery: string
+  email: string
+}
+
+interface LocationState {
+  toast?: string
 }
 
 export function ProyectosPage() {
-  const { searchQuery } = useOutletContext<ShellContext>()
+  const { searchQuery, email } = useOutletContext<ShellContext>()
+  const location = useLocation()
+  const [toast, setToast] = useState(() => (location.state as LocationState | null)?.toast ?? null)
   const query = searchQuery.trim().toLowerCase()
   const visibleProyectos = query
     ? proyectos.filter(
         (proyecto) => proyecto.name.toLowerCase().includes(query) || proyecto.url.toLowerCase().includes(query),
       )
     : proyectos
+  const totalDeploys = proyectos.reduce((sum, proyecto) => sum + proyecto.deploys.length, 0)
+  const onlineCount = proyectos.filter((proyecto) => proyecto.status === 'online').length
+
+  useEffect(() => {
+    if (!toast) return
+    const timeout = setTimeout(() => setToast(null), 4000)
+    return () => clearTimeout(timeout)
+  }, [toast])
 
   return (
     <div>
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <h1 className="font-heading text-2xl font-semibold">Proyectos</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Despliega apps HTML y Next.js</p>
+          <h1 className="font-heading text-2xl font-semibold">Hola, {getFirstName(email)}. ¿Qué quieres publicar hoy?</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Despliega, valida y comparte experiencias creadas con IA en minutos.
+          </p>
         </div>
         <Button asChild>
           <Link to="/proyectos/nuevo">
@@ -30,6 +52,12 @@ export function ProyectosPage() {
             Nuevo proyecto
           </Link>
         </Button>
+      </div>
+
+      <div className="mb-8 grid grid-cols-3 gap-3 sm:max-w-md">
+        <StatCard label="Proyectos activos" value={proyectos.length} />
+        <StatCard label="Publicaciones" value={totalDeploys} />
+        <StatCard label="En línea" value={onlineCount} />
       </div>
 
       {visibleProyectos.length === 0 ? (
@@ -55,12 +83,15 @@ export function ProyectosPage() {
           )}
         </div>
       ) : (
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visibleProyectos.map((proyecto) => (
             <ProjectCard key={proyecto.id} proyecto={proyecto} />
           ))}
+          {!query && <NewProjectCard />}
         </div>
       )}
+
+      {toast && <PublishToast message={toast} />}
     </div>
   )
 }

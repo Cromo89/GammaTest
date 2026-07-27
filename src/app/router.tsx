@@ -8,11 +8,10 @@ import { ProyectoDetallePage } from '@/pages/proyectos/ProyectoDetallePage'
 import { ConfiguracionPage } from '@/pages/configuracion/ConfiguracionPage'
 import { DocumentacionPage } from '@/pages/documentacion/DocumentacionPage'
 import { useUserTier } from '@/features/user-tier/use-user-tier'
-import type { Tier } from '@/data/user'
 
 function ShellRoute() {
-  const { email, tier, setTier } = useUserTier()
-  return <AppShell email={email} tier={tier} onTierChange={(next) => setTier(next as Tier)} />
+  const { email, tier } = useUserTier()
+  return <AppShell email={email} tier={tier} />
 }
 
 export const router = createBrowserRouter([
