@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useOutletContext } from 'react-router'
 import { Lightbulb, Plus } from 'lucide-react'
 import { Button } from '@/shared/ui'
@@ -7,6 +7,9 @@ import { proyectos } from '@/data/proyectos'
 import { ProjectStats } from '../proyectos/components/project-stats'
 import { ExpiringProjects } from '../proyectos/components/expiring-projects'
 import { ProjectsSection } from './components/projects-section'
+import { InicioSkeleton } from './components/inicio-skeleton'
+
+const LOADING_DELAY_MS = 700
 
 const TIPS = [
   'Usa ⌘K (o Ctrl+K) para buscar cualquier proyecto al instante, sin salir del teclado.',
@@ -24,12 +27,20 @@ interface ShellContext {
 export function InicioPage() {
   const { searchQuery, email } = useOutletContext<ShellContext>()
   const [tip] = useState(() => TIPS[Math.floor(Math.random() * TIPS.length)])
+  const [isLoading, setIsLoading] = useState(true)
   const query = searchQuery.trim().toLowerCase()
   const visibleProyectos = query
     ? proyectos.filter(
         (proyecto) => proyecto.name.toLowerCase().includes(query) || proyecto.url.toLowerCase().includes(query),
       )
     : proyectos
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setIsLoading(false), LOADING_DELAY_MS)
+    return () => window.clearTimeout(id)
+  }, [])
+
+  if (isLoading) return <InicioSkeleton />
 
   return (
     <div>

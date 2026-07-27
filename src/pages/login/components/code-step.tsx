@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { Loader2 } from 'lucide-react'
 import { Button } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
+
+const VERIFY_DELAY_MS = 900
 
 const CODE_LENGTH = 6
 const RESEND_SECONDS = 26
@@ -14,8 +17,14 @@ interface CodeStepProps {
 export function CodeStep({ email, onBack, onSubmit }: CodeStepProps) {
   const [digits, setDigits] = useState<string[]>(Array(CODE_LENGTH).fill(''))
   const [secondsLeft, setSecondsLeft] = useState(RESEND_SECONDS)
+  const [isVerifying, setIsVerifying] = useState(false)
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const isComplete = digits.every((digit) => digit !== '')
+
+  function handleSubmit() {
+    setIsVerifying(true)
+    window.setTimeout(onSubmit, VERIFY_DELAY_MS)
+  }
 
   useEffect(() => {
     if (secondsLeft <= 0) return
@@ -66,8 +75,15 @@ export function CodeStep({ email, onBack, onSubmit }: CodeStepProps) {
         ))}
       </div>
 
-      <Button className="w-full" disabled={!isComplete} onClick={onSubmit}>
-        Iniciar sesión
+      <Button className="w-full" disabled={!isComplete || isVerifying} onClick={handleSubmit}>
+        {isVerifying ? (
+          <>
+            <Loader2 className="size-4 animate-spin" />
+            Verificando...
+          </>
+        ) : (
+          'Iniciar sesión'
+        )}
       </Button>
 
       <button type="button" onClick={onBack} className="mt-3 text-sm hover:text-foreground">
