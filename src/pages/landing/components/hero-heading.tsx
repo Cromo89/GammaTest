@@ -37,7 +37,7 @@ export function HeroHeading() {
             style={{ transitionDelay: `${index * 55}ms` }}
             className={cn(
               'mr-[0.28em] inline-block transition-all duration-500 ease-out',
-              word.gradient && 'bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-clip-text text-transparent',
+              word.gradient && 'bg-[image:var(--hero-title-gradient)] bg-clip-text text-transparent',
               mounted ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0',
             )}
           >

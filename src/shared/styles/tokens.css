@@ -63,6 +63,9 @@
   --sidebar-foreground: var(--color-devexp-text);
   --sidebar-accent: var(--color-devexp-hover);
   --sidebar-accent-foreground: var(--color-devexp-primary);
+
+  --hero-title-gradient: linear-gradient(to right, var(--color-brand-teal), var(--color-brand-cyan), var(--color-brand-blue));
+  --hero-eyebrow-color: #a9bccb;
 }
 
 /* Tema claro — se activa vía [data-theme="light"], tanto en LandingPage como en el AppShell del dashboard */
@@ -79,6 +82,9 @@
   --sidebar-foreground: #0b1220;
   --sidebar-accent: rgb(10 20 35 / 4%);
   --sidebar-accent-foreground: var(--color-devexp-primary);
+
+  --hero-title-gradient: linear-gradient(to left, #1b4fc4, var(--color-devexp-violet), #0e8fae);
+  --hero-eyebrow-color: var(--muted-foreground);
 }
 
 @theme inline {

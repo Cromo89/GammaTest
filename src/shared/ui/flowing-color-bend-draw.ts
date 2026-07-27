@@ -109,13 +109,24 @@ function drawBand(ctx: CanvasRenderingContext2D, points: Point[], gradient: Canv
   ctx.stroke()
 }
 
+// Curva "smoothstep" (en vez de un fade lineal de 2 stops) para que el borde de la nube se
+// disuelva en el fondo plano sin dejar un límite perceptible: el ojo es más sensible a los
+// cambios de opacidad cerca de los extremos, así que un fade lineal simple igual se percibe
+// como un corte.
+function smoothstep(t: number): number {
+  return t * t * (3 - 2 * t)
+}
+
 function applyEdgeFade(ctx: CanvasRenderingContext2D, width: number, height: number, fadeEdge: FadeEdge) {
-  const fadeSpan = height * (fadeEdge === 'top' ? 0.97 : 0.45)
+  const fadeSpan = height * (fadeEdge === 'top' ? 0.97 : 0.62)
   const y0 = fadeEdge === 'bottom' ? height - fadeSpan : fadeSpan
   const y1 = fadeEdge === 'bottom' ? height : 0
   const gradient = ctx.createLinearGradient(0, y0, 0, y1)
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0)')
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 1)')
+  const steps = 12
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps
+    gradient.addColorStop(t, `rgba(0, 0, 0, ${smoothstep(t)})`)
+  }
   ctx.save()
   ctx.globalCompositeOperation = 'destination-out'
   ctx.fillStyle = gradient

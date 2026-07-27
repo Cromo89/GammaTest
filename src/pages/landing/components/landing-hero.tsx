@@ -9,7 +9,7 @@ export function LandingHero() {
       <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.35} />
 
       <div className="flex flex-1 flex-col items-center justify-center">
-        <span className="font-mono text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
+        <span className="font-mono text-xs font-medium tracking-[0.2em] text-[color:var(--hero-eyebrow-color)] uppercase">
           Engineering Office
         </span>
 
