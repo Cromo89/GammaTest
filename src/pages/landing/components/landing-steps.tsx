@@ -131,7 +131,7 @@ export function LandingSteps() {
         >
           <div className="flex flex-col justify-center lg:sticky lg:top-24 lg:min-h-[calc(100vh-6rem)]">
             <Reveal blur className="text-left">
-              <h2 className="max-w-xl font-heading text-4xl font-semibold tracking-tight">
+              <h2 className="max-w-xl font-heading text-[28px] font-semibold tracking-tight sm:text-4xl">
                 De la IA a producción en cuatro pasos
               </h2>
               <p className="mt-4 text-[15px] text-muted-foreground lg:whitespace-nowrap">

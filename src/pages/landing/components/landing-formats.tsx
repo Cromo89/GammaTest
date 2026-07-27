@@ -37,7 +37,7 @@ export function LandingFormats() {
   return (
     <section id="formatos" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <Reveal blur className="max-w-xl">
-        <h2 className="font-heading text-4xl font-semibold tracking-tight">Tu stack, sin fricción.</h2>
+        <h2 className="font-heading text-[28px] font-semibold tracking-tight sm:text-4xl">Tu stack, sin fricción.</h2>
         <p className="mt-4 text-[15px] text-muted-foreground">
           No necesitas adaptar tu proyecto a una tecnología propietaria.
         </p>

@@ -29,7 +29,7 @@ export function LandingProblem() {
   return (
     <section id="crear-es-rapido" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
       <Reveal blur className="mx-auto max-w-2xl text-center">
-        <h2 className="font-heading text-4xl font-semibold tracking-tight">
+        <h2 className="font-heading text-[28px] font-semibold tracking-tight sm:text-4xl">
           Crear es rápido.
           <br />
           <span className="bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-blue bg-clip-text text-transparent">
