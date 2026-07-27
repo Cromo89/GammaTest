@@ -15,7 +15,7 @@ export function AppShell({ email, tier }: AppShellProps) {
   const { theme, toggleTheme } = useDashboardTheme()
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground" data-theme={theme}>
+    <div className="flex h-screen overflow-hidden bg-background text-foreground" data-theme={theme}>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar

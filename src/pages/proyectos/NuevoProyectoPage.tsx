@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/shared/ui'
+import type { ProjectType } from '@/data/proyectos'
 import { WizardStepper } from './components/wizard-stepper'
 import { WizardStepUpload } from './components/wizard-step-upload'
 import { WizardStepDetect } from './components/wizard-step-detect'
 import { WizardStepConfigure } from './components/wizard-step-configure'
 import { WizardStepDeploy } from './components/wizard-step-deploy'
 
-const MOCK_FILE_NAME = 'index.html'
 const TOTAL_STEPS = 4
 
 const STEP_DESCRIPTIONS: Record<number, string> = {
@@ -22,6 +22,7 @@ export function NuevoProyectoPage() {
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [fileName, setFileName] = useState<string | null>(null)
+  const [projectType, setProjectType] = useState<ProjectType>('HTML')
   const [name, setName] = useState('')
 
   const canContinue = step === 1 ? fileName !== null : step === 3 ? name.trim().length > 0 : true
@@ -62,10 +63,18 @@ export function NuevoProyectoPage() {
 
       <p className="-mt-2 text-sm text-muted-foreground">{STEP_DESCRIPTIONS[step]}</p>
 
-      {step === 1 && <WizardStepUpload fileName={fileName} onSelectFile={() => setFileName(MOCK_FILE_NAME)} />}
-      {step === 2 && <WizardStepDetect fileName={fileName ?? MOCK_FILE_NAME} />}
+      {step === 1 && (
+        <WizardStepUpload
+          fileName={fileName}
+          onSelectFile={(selectedName, type) => {
+            setFileName(selectedName)
+            setProjectType(type)
+          }}
+        />
+      )}
+      {step === 2 && <WizardStepDetect fileName={fileName ?? ''} type={projectType} />}
       {step === 3 && <WizardStepConfigure name={name} onNameChange={setName} />}
-      {step === 4 && <WizardStepDeploy name={name} fileName={fileName ?? MOCK_FILE_NAME} />}
+      {step === 4 && <WizardStepDeploy name={name} fileName={fileName ?? ''} type={projectType} />}
 
       <div className="flex justify-end">
         <Button disabled={!canContinue} onClick={handlePrimaryAction}>

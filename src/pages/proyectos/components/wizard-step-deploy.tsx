@@ -1,12 +1,14 @@
 import { FileCode2, Globe } from 'lucide-react'
 import { slugify } from '@/shared/lib/utils'
+import type { ProjectType } from '@/data/proyectos'
 
 interface WizardStepDeployProps {
   name: string
   fileName: string
+  type: ProjectType
 }
 
-export function WizardStepDeploy({ name, fileName }: WizardStepDeployProps) {
+export function WizardStepDeploy({ name, fileName, type }: WizardStepDeployProps) {
   const slug = slugify(name)
 
   return (
@@ -19,7 +21,7 @@ export function WizardStepDeploy({ name, fileName }: WizardStepDeployProps) {
           <FileCode2 className="size-4 shrink-0 text-muted-foreground" />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">{name || 'Sin nombre'}</p>
-            <p className="text-xs text-muted-foreground">{fileName} · HTML</p>
+            <p className="text-xs text-muted-foreground">{fileName} · {type}</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-lg border border-border px-4 py-3">
