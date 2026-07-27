@@ -22,7 +22,7 @@ export function LoginPage() {
           {step === 'email' ? (
             <EmailStep email={email} onEmailChange={setEmail} onSubmit={() => setStep('code')} />
           ) : (
-            <CodeStep email={email} onBack={() => setStep('email')} onSubmit={() => navigate('/proyectos')} />
+            <CodeStep email={email} onBack={() => setStep('email')} onSubmit={() => navigate('/inicio')} />
           )}
         </div>
       </div>

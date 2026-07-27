@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-import { BookOpen, LayoutGrid, Settings } from 'lucide-react'
+import { BookOpen, Home, LayoutGrid, Settings } from 'lucide-react'
 
 export interface NavItem {
   label: string
@@ -15,7 +15,10 @@ export interface NavGroup {
 export const navGroups: NavGroup[] = [
   {
     label: 'Workspace',
-    items: [{ label: 'Proyectos', href: '/proyectos', icon: LayoutGrid }],
+    items: [
+      { label: 'Inicio', href: '/inicio', icon: Home },
+      { label: 'Proyectos', href: '/proyectos', icon: LayoutGrid },
+    ],
   },
   {
     label: 'Administración',

@@ -13,7 +13,12 @@ const TYPE_COLOR: Record<ProjectType, string> = {
   'Next.js': 'bg-devexp-violet/10 text-devexp-violet',
 }
 
-export function ProjectCard({ proyecto }: { proyecto: Proyecto }) {
+interface ProjectCardProps {
+  proyecto: Proyecto
+  showOwner?: boolean
+}
+
+export function ProjectCard({ proyecto, showOwner = false }: ProjectCardProps) {
   const isOnline = proyecto.status === 'online'
   const TypeIcon = TYPE_ICON[proyecto.type]
 
@@ -43,6 +48,7 @@ export function ProjectCard({ proyecto }: { proyecto: Proyecto }) {
       </div>
 
       <p className="text-xs text-muted-foreground">Última publicación: {formatDateTime(proyecto.lastPublishedAt)}</p>
+      {showOwner && <p className="mt-1 text-xs text-muted-foreground">Por {proyecto.owner}</p>}
     </Link>
   )
 }

@@ -11,6 +11,13 @@ import { WizardStepDeploy } from './components/wizard-step-deploy'
 const MOCK_FILE_NAME = 'index.html'
 const TOTAL_STEPS = 4
 
+const STEP_DESCRIPTIONS: Record<number, string> = {
+  1: 'Sube el archivo o carpeta de tu proyecto. Aceptamos HTML, .zip o cualquier carpeta de código — Gamma se encarga del resto.',
+  2: 'Gamma revisa tu proyecto para identificar automáticamente su tipo (HTML, React/Vite, Next.js) y dejarlo listo para configurar.',
+  3: 'Dale un nombre a tu proyecto. Este nombre define la URL pública donde tu equipo podrá verlo.',
+  4: 'Revisa que todo esté correcto. Al publicar, tu proyecto queda disponible de inmediato en la URL de abajo.',
+}
+
 export function NuevoProyectoPage() {
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
@@ -52,6 +59,8 @@ export function NuevoProyectoPage() {
       </div>
 
       <WizardStepper current={step} />
+
+      <p className="-mt-2 text-sm text-muted-foreground">{STEP_DESCRIPTIONS[step]}</p>
 
       {step === 1 && <WizardStepUpload fileName={fileName} onSelectFile={() => setFileName(MOCK_FILE_NAME)} />}
       {step === 2 && <WizardStepDetect fileName={fileName ?? MOCK_FILE_NAME} />}

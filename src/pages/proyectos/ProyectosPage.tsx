@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router'
 import { Folder, Plus } from 'lucide-react'
 import { Button } from '@/shared/ui'
-import { getFirstName } from '@/shared/lib/utils'
+import { getFirstName, getFullName } from '@/shared/lib/utils'
 import { proyectos } from '@/data/proyectos'
 import { ProjectCard } from './components/project-card'
 import { NewProjectCard } from './components/new-project-card'
-import { StatCard } from './components/stat-card'
+import { ProjectStats } from './components/project-stats'
+import { ExpiringProjects } from './components/expiring-projects'
 import { PublishToast } from './components/publish-toast'
 
 interface ShellContext {
@@ -22,14 +23,13 @@ export function ProyectosPage() {
   const { searchQuery, email } = useOutletContext<ShellContext>()
   const location = useLocation()
   const [toast, setToast] = useState(() => (location.state as LocationState | null)?.toast ?? null)
+  const myProyectos = proyectos.filter((proyecto) => proyecto.owner === getFullName(email))
   const query = searchQuery.trim().toLowerCase()
   const visibleProyectos = query
-    ? proyectos.filter(
+    ? myProyectos.filter(
         (proyecto) => proyecto.name.toLowerCase().includes(query) || proyecto.url.toLowerCase().includes(query),
       )
-    : proyectos
-  const totalDeploys = proyectos.reduce((sum, proyecto) => sum + proyecto.deploys.length, 0)
-  const onlineCount = proyectos.filter((proyecto) => proyecto.status === 'online').length
+    : myProyectos
 
   useEffect(() => {
     if (!toast) return
@@ -54,10 +54,15 @@ export function ProyectosPage() {
         </Button>
       </div>
 
-      <div className="mb-8 grid grid-cols-3 gap-3 sm:max-w-md">
-        <StatCard label="Proyectos activos" value={proyectos.length} />
-        <StatCard label="Publicaciones" value={totalDeploys} />
-        <StatCard label="En línea" value={onlineCount} />
+      <ProjectStats proyectos={myProyectos} />
+
+      <ExpiringProjects proyectos={myProyectos} />
+
+      <div className="mb-4">
+        <h2 className="font-heading text-lg font-semibold">Tus proyectos</h2>
+        <p className="text-sm text-muted-foreground">
+          Los proyectos que tú has publicado. Para ver los de todo el equipo, visita Inicio.
+        </p>
       </div>
 
       {visibleProyectos.length === 0 ? (

@@ -1,4 +1,5 @@
 import { Shuffle } from 'lucide-react'
+import { Tooltip } from '@/shared/ui'
 import { slugify } from '@/shared/lib/utils'
 
 const ADJECTIVES = ['veloz', 'brillante', 'audaz', 'ágil', 'nítido', 'vívido', 'certero', 'fluido']
@@ -31,15 +32,16 @@ export function WizardStepConfigure({ name, onNameChange }: WizardStepConfigureP
           placeholder="Mi proyecto increíble"
           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none"
         />
-        <button
-          type="button"
-          onClick={() => onNameChange(randomName())}
-          aria-label="Sugerir nombre aleatorio"
-          title="Sugerir nombre aleatorio"
-          className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
-        >
-          <Shuffle className="size-4" />
-        </button>
+        <Tooltip content="Sugerir nombre aleatorio">
+          <button
+            type="button"
+            onClick={() => onNameChange(randomName())}
+            aria-label="Sugerir nombre aleatorio"
+            className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground hover:text-foreground"
+          >
+            <Shuffle className="size-4" />
+          </button>
+        </Tooltip>
       </div>
 
       {slug && (

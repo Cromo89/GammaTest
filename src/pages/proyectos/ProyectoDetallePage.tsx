@@ -1,11 +1,11 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { Check, Code2, Copy, ExternalLink, Globe, Upload } from 'lucide-react'
+import { ArrowLeft, Check, Copy, ExternalLink, Globe } from 'lucide-react'
 import { Button, Dropzone } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
 import { proyectos } from '@/data/proyectos'
 import { DeployHistoryTable } from './components/deploy-history-table'
-import { DeleteProjectDialog } from './components/delete-project-dialog'
+import { ProjectDetailHeader } from './components/project-detail-header'
 
 function Pill({ children, dot }: { children: ReactNode; dot?: 'online' | 'offline' }) {
   return (
@@ -39,24 +39,20 @@ export function ProyectoDetallePage() {
 
   return (
     <div className="flex max-w-3xl flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
-            <Code2 className="size-4" />
-          </div>
-          <h1 className="font-heading text-xl font-semibold">{proyecto.name}</h1>
-          <span className="rounded-md border border-border px-2 py-0.5 text-xs text-muted-foreground">
-            {proyecto.type}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button onClick={() => dropzoneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
-            <Upload className="size-4" />
-            Publicar nueva versión
-          </Button>
-          <DeleteProjectDialog projectName={proyecto.name} onConfirm={handleDelete} />
-        </div>
-      </div>
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className="inline-flex w-fit items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft className="size-4" />
+        Volver
+      </button>
+
+      <ProjectDetailHeader
+        proyecto={proyecto}
+        onPublishClick={() => dropzoneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+        onDelete={handleDelete}
+      />
 
       <div className="flex items-center justify-between gap-2 rounded-lg border border-border px-3 py-2">
         <span className="flex items-center gap-2 truncate font-mono text-sm text-muted-foreground">

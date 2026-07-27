@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { AppShell } from '@/shared/layout/app-shell'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { InicioPage } from '@/pages/inicio/InicioPage'
 import { ProyectosPage } from '@/pages/proyectos/ProyectosPage'
 import { NuevoProyectoPage } from '@/pages/proyectos/NuevoProyectoPage'
 import { ProyectoDetallePage } from '@/pages/proyectos/ProyectoDetallePage'
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
   {
     element: <ShellRoute />,
     children: [
+      { path: 'inicio', element: <InicioPage /> },
       { path: 'proyectos', element: <ProyectosPage /> },
       { path: 'proyectos/nuevo', element: <NuevoProyectoPage /> },
       { path: 'proyectos/:id', element: <ProyectoDetallePage /> },

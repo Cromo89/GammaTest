@@ -22,6 +22,15 @@ export function getFirstName(email: string) {
   return first ? first.charAt(0).toUpperCase() + first.slice(1) : ''
 }
 
+export function getFullName(email: string) {
+  const [local] = email.split('@')
+  return local
+    .split(/[._-]/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
 export function formatDateTime(isoDate: string) {
   return new Date(isoDate).toLocaleString('es-CL', {
     day: 'numeric',
