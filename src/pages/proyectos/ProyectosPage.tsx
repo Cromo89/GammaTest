@@ -39,14 +39,14 @@ export function ProyectosPage() {
 
   return (
     <div>
-      <div className="mb-8 flex items-start justify-between">
+      <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="font-heading text-2xl font-semibold">Hola, {getFirstName(email)}. ¿Qué quieres publicar hoy?</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Despliega, valida y comparte experiencias creadas con IA en minutos.
           </p>
         </div>
-        <Button asChild>
+        <Button asChild className="w-full sm:w-auto">
           <Link to="/proyectos/nuevo">
             <Plus className="size-4" />
             Nuevo proyecto
