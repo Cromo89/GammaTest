@@ -29,13 +29,12 @@ export const NOTIFICATIONS: Notification[] = [
 export interface Language {
   code: string
   label: string
-  flag: string
 }
 
 export const LANGUAGES: Language[] = [
-  { code: 'es', label: 'Español', flag: '🇨🇱' },
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'pt', label: 'Português', flag: '🇧🇷' },
+  { code: 'es', label: 'Español' },
+  { code: 'en', label: 'English' },
+  { code: 'pt', label: 'Português' },
 ]
 
 export function getInitials(email: string) {

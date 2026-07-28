@@ -31,7 +31,6 @@ export function LanguageMenu({ value, onChange, variant = 'compact' }: LanguageM
           )}
         >
           <span className="flex items-center gap-1.5">
-            <span aria-hidden="true">{current.flag}</span>
             {variant === 'compact' ? (
               <span className="hidden sm:inline">{current.code.split('-')[0].toUpperCase()}</span>
             ) : (
@@ -51,7 +50,6 @@ export function LanguageMenu({ value, onChange, variant = 'compact' }: LanguageM
         <DropdownMenuSeparator />
         {LANGUAGES.map((language) => (
           <DropdownMenuItem key={language.code} onSelect={() => onChange(language.code)}>
-            <span aria-hidden="true">{language.flag}</span>
             <span className="flex-1">{language.label}</span>
             {language.code === value && <Check className="size-4 shrink-0 text-primary" />}
           </DropdownMenuItem>
