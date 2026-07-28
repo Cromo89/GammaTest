@@ -15,7 +15,7 @@ export function LoginPage() {
 
       <div className="relative flex w-full max-w-sm flex-col items-center">
         <div className="w-full rounded-2xl border border-white/10 bg-background/40 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
-          <Link to="/" className="mb-6 inline-flex">
+          <Link to="/" className="mb-6 flex justify-center">
             <BrandMark />
           </Link>
 

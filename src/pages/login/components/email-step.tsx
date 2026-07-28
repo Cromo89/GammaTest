@@ -30,8 +30,8 @@ export function EmailStep({ email, onEmailChange, onSubmit }: EmailStepProps) {
         </Button>
       </form>
 
-      <p className="mt-3 flex w-full items-center gap-1.5 text-left text-xs text-muted-foreground">
-        <Info className="size-3.5 shrink-0" />
+      <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Info className="size-3.5" />
         Solo se permiten correos Cencosud
       </p>
     </div>
