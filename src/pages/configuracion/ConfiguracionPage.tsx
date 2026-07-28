@@ -27,7 +27,9 @@ export function ConfiguracionPage() {
       <Card>
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-medium">Tu tier actual</h2>
-          <Badge className="capitalize">{currentTierInfo.label}</Badge>
+          <Badge variant="success" className="capitalize">
+            {currentTierInfo.label}
+          </Badge>
         </div>
         <p className="text-sm text-muted-foreground">{currentTierInfo.description}</p>
         <div className="mt-4 flex items-center justify-between rounded-lg border border-border px-3 py-2 text-sm">

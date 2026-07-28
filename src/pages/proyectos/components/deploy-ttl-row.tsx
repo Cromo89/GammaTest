@@ -30,7 +30,9 @@ export function DeployTtlRow({ deploy, showLogs, onExtendTtl }: DeployTtlRowProp
     <tr className={cn('border-b border-border text-sm last:border-0', showLogs && 'border-b-0')}>
       <td colSpan={4} className="px-4 pt-4 pb-3">
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-          <span className="font-mono text-muted-foreground uppercase">TTL</span>
+          <Tooltip content="Time To Live: cuánto tiempo seguirá en línea este deploy antes de expirar automáticamente">
+            <span className="cursor-help font-mono text-muted-foreground uppercase">TTL</span>
+          </Tooltip>
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-muted-foreground">Expira {deploy.expiresAtLabel}</span>
             <div className="flex gap-1">

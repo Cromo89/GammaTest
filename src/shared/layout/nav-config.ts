@@ -17,7 +17,7 @@ export const navGroups: NavGroup[] = [
     label: 'Workspace',
     items: [
       { label: 'Inicio', href: '/inicio', icon: Home },
-      { label: 'Proyectos', href: '/proyectos', icon: LayoutGrid },
+      { label: 'Mis proyectos', href: '/proyectos', icon: LayoutGrid },
     ],
   },
   {

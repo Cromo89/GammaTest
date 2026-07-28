@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router'
-import { Folder, Plus } from 'lucide-react'
+import { LayoutGrid, Plus } from 'lucide-react'
 import { Button } from '@/shared/ui'
 import { getFirstName, getFullName } from '@/shared/lib/utils'
 import { useProyectos } from '@/features/proyectos/use-proyectos'
@@ -62,7 +62,7 @@ export function ProyectosPage() {
         <div className="flex flex-col items-center justify-center gap-6 py-24 text-center">
           <div className="flex flex-col items-center gap-4">
             <div className="flex size-16 items-center justify-center rounded-2xl bg-muted">
-              <Folder className="size-7 text-muted-foreground" />
+              <LayoutGrid className="size-7 text-muted-foreground" />
             </div>
             <div>
               <p className="font-medium">{query ? 'Sin resultados' : 'Sin proyectos aún'}</p>

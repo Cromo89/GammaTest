@@ -14,7 +14,7 @@ const TOUR_STEPS: TourStep[] = [
       'Todo lo que está publicando tu equipo: proyectos activos, avisos de expiración próxima y estadísticas generales del portal.',
   },
   {
-    title: 'Proyectos',
+    title: 'Mis proyectos',
     href: '/proyectos',
     description:
       'Tus propios proyectos. Desde acá creas uno nuevo, revisas su historial de deploys y gestionas su URL pública.',
