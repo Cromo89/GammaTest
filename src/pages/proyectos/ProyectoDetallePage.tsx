@@ -1,11 +1,14 @@
-import { useRef, useState, type ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { ArrowLeft, Check, Copy, ExternalLink, Globe } from 'lucide-react'
-import { Button, Dropzone } from '@/shared/ui'
+import { ArrowLeft } from 'lucide-react'
+import { Dropzone } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
-import { proyectos } from '@/data/proyectos'
+import { useProyectos } from '@/features/proyectos/use-proyectos'
+import { useDeployActions } from './use-deploy-actions'
 import { DeployHistoryTable } from './components/deploy-history-table'
 import { ProjectDetailHeader } from './components/project-detail-header'
+import { ProjectUrlBar } from './components/project-url-bar'
+import { PublishToast } from './components/publish-toast'
 
 function Pill({ children, dot }: { children: ReactNode; dot?: 'online' | 'offline' }) {
   return (
@@ -19,22 +22,22 @@ function Pill({ children, dot }: { children: ReactNode; dot?: 'online' | 'offlin
 export function ProyectoDetallePage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { proyectos, deleteProyecto } = useProyectos()
   const proyecto = proyectos.find((p) => p.id === id)
-  const dropzoneRef = useRef<HTMLDivElement>(null)
-  const [copied, setCopied] = useState(false)
+  const historyRef = useRef<HTMLDivElement>(null)
+  const { toast, handlePublish, handleRollback, handleToggleStatus, handleExtendTtl } = useDeployActions(proyecto)
 
   if (!proyecto) return <p className="text-sm text-muted-foreground">Proyecto no encontrado.</p>
 
-  function handleCopyUrl() {
-    if (!proyecto) return
-    navigator.clipboard.writeText(`https://${proyecto.url}`)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   function handleDelete() {
     if (!proyecto) return
+    deleteProyecto(proyecto.id)
     navigate('/proyectos', { state: { toast: `"${proyecto.name}" fue eliminado.` } })
+  }
+
+  function handlePublishClick() {
+    handlePublish()
+    historyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
   return (
@@ -48,30 +51,9 @@ export function ProyectoDetallePage() {
         Volver
       </button>
 
-      <ProjectDetailHeader
-        proyecto={proyecto}
-        onPublishClick={() => dropzoneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-        onDelete={handleDelete}
-      />
+      <ProjectDetailHeader proyecto={proyecto} onPublishClick={handlePublishClick} onDelete={handleDelete} />
 
-      <div className="flex items-center justify-between gap-2 rounded-lg border border-border px-3 py-2">
-        <span className="flex items-center gap-2 truncate font-mono text-sm text-muted-foreground">
-          <Globe className="size-4 shrink-0" />
-          {proyecto.url}
-        </span>
-        <div className="flex shrink-0 gap-2">
-          <Button variant="outline" onClick={handleCopyUrl}>
-            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-            {copied ? 'Copiado' : 'Copiar'}
-          </Button>
-          <Button asChild>
-            <a href={`https://${proyecto.url}`} target="_blank" rel="noreferrer">
-              <ExternalLink className="size-4" />
-              Visitar
-            </a>
-          </Button>
-        </div>
-      </div>
+      <ProjectUrlBar url={proyecto.url} />
 
       <div className="flex flex-wrap gap-2">
         <Pill dot={proyecto.status}>{proyecto.status === 'online' ? 'En línea' : 'Detenido'}</Pill>
@@ -79,14 +61,20 @@ export function ProyectoDetallePage() {
           {proyecto.deploys.length} deploy{proyecto.deploys.length === 1 ? '' : 's'}
         </Pill>
         <Pill>{proyecto.hoursRemaining}h restantes</Pill>
-        <Pill>{proyecto.type}</Pill>
       </div>
 
-      <div ref={dropzoneRef}>
-        <Dropzone title="Arrastra un .zip, .html o carpeta para deployar" />
+      <Dropzone title="Arrastra un .zip, .html o carpeta para deployar" />
+
+      <div ref={historyRef}>
+        <DeployHistoryTable
+          deploys={proyecto.deploys}
+          onRollback={handleRollback}
+          onToggleStatus={handleToggleStatus}
+          onExtendTtl={handleExtendTtl}
+        />
       </div>
 
-      <DeployHistoryTable deploys={proyecto.deploys} />
+      {toast && <PublishToast message={toast} />}
     </div>
   )
 }

@@ -11,7 +11,6 @@ export function InicioSkeleton() {
         <div className="flex flex-col gap-2">
           <SkeletonBlock className="h-3 w-32" />
           <SkeletonBlock className="h-7 w-48" />
-          <SkeletonBlock className="h-4 w-72 max-w-full" />
         </div>
         <SkeletonBlock className="h-9 w-full sm:w-40" />
       </div>
@@ -21,8 +20,6 @@ export function InicioSkeleton() {
         <SkeletonBlock className="h-28" />
         <SkeletonBlock className="h-28" />
       </div>
-
-      <SkeletonBlock className="mb-8 h-20" />
 
       <div className="mb-4 flex flex-col gap-2">
         <SkeletonBlock className="h-5 w-56" />

@@ -1,7 +1,14 @@
 import type { Deploy } from '@/data/proyectos'
 import { DeployItem } from './deploy-item'
 
-export function DeployHistoryTable({ deploys }: { deploys: Deploy[] }) {
+interface DeployHistoryTableProps {
+  deploys: Deploy[]
+  onRollback: (deployId: string) => void
+  onToggleStatus: (deployId: string) => void
+  onExtendTtl: (deployId: string, days: 1 | 3 | 7 | 'reset') => void
+}
+
+export function DeployHistoryTable({ deploys, onRollback, onToggleStatus, onExtendTtl }: DeployHistoryTableProps) {
   return (
     <div>
       <p className="mb-2 text-xs font-mono text-muted-foreground uppercase">Historial de deploys</p>
@@ -17,7 +24,13 @@ export function DeployHistoryTable({ deploys }: { deploys: Deploy[] }) {
           </thead>
           <tbody>
             {deploys.map((deploy) => (
-              <DeployItem key={deploy.id} deploy={deploy} />
+              <DeployItem
+                key={deploy.id}
+                deploy={deploy}
+                onRollback={onRollback}
+                onToggleStatus={onToggleStatus}
+                onExtendTtl={onExtendTtl}
+              />
             ))}
           </tbody>
         </table>

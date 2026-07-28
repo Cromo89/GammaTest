@@ -36,7 +36,9 @@ export const proyectos: Proyecto[] = [
     lastPublishedAt: '2026-07-21T12:08:18',
     hoursRemaining: 168,
     deploys: [
-      { id: 'd1', hash: 'e1052f0e', status: 'online', isCurrent: true, type: 'HTML', version: 'v1', relativeLabel: 'ahora mismo', expiresAtLabel: '28/7/2026, 12:08:18 p.m.', ttlPercent: 100 },
+      { id: 'd3', hash: 'e1052f0e', status: 'online', isCurrent: true, type: 'HTML', version: 'v3', relativeLabel: 'ahora mismo', expiresAtLabel: '28/7/2026, 12:08:18 p.m.', ttlPercent: 100 },
+      { id: 'd2', hash: 'a29f31c7', status: 'offline', isCurrent: false, type: 'HTML', version: 'v2', relativeLabel: 'hace 3 días', expiresAtLabel: '25/7/2026, 09:40:00 a.m.', ttlPercent: 0 },
+      { id: 'd1', hash: '7bd410aa', status: 'offline', isCurrent: false, type: 'HTML', version: 'v1', relativeLabel: 'hace 7 días', expiresAtLabel: '21/7/2026, 12:08:18 p.m.', ttlPercent: 0 },
     ],
   },
   {
@@ -49,7 +51,9 @@ export const proyectos: Proyecto[] = [
     lastPublishedAt: '2026-07-25T09:14:00',
     hoursRemaining: 720,
     deploys: [
-      { id: 'd1', hash: 'a1b2c3d4', status: 'online', isCurrent: true, type: 'Next.js', version: 'v3', relativeLabel: 'hace 2 días', expiresAtLabel: '24/8/2026, 09:14:00 a.m.', ttlPercent: 85 },
+      { id: 'd3', hash: 'a1b2c3d4', status: 'online', isCurrent: true, type: 'Next.js', version: 'v3', relativeLabel: 'hace 2 días', expiresAtLabel: '24/8/2026, 09:14:00 a.m.', ttlPercent: 85 },
+      { id: 'd2', hash: '3e7fa019', status: 'offline', isCurrent: false, type: 'Next.js', version: 'v2', relativeLabel: 'hace 9 días', expiresAtLabel: '17/8/2026, 14:20:00 p.m.', ttlPercent: 0 },
+      { id: 'd1', hash: '82bcf005', status: 'offline', isCurrent: false, type: 'Next.js', version: 'v1', relativeLabel: 'hace 15 días', expiresAtLabel: '10/8/2026, 11:05:00 a.m.', ttlPercent: 0 },
     ],
   },
   {
@@ -75,7 +79,8 @@ export const proyectos: Proyecto[] = [
     lastPublishedAt: '2026-07-10T11:00:00',
     hoursRemaining: 0,
     deploys: [
-      { id: 'd1', hash: 'c3d4e5f6', status: 'offline', isCurrent: true, type: 'HTML', version: 'v2', relativeLabel: 'hace 17 días', expiresAtLabel: '17/7/2026, 11:00:00 a.m.', ttlPercent: 0 },
+      { id: 'd2', hash: 'c3d4e5f6', status: 'offline', isCurrent: true, type: 'HTML', version: 'v2', relativeLabel: 'hace 17 días', expiresAtLabel: '17/7/2026, 11:00:00 a.m.', ttlPercent: 0 },
+      { id: 'd1', hash: '91ffb203', status: 'offline', isCurrent: false, type: 'HTML', version: 'v1', relativeLabel: 'hace 24 días', expiresAtLabel: '10/7/2026, 09:30:00 a.m.', ttlPercent: 0 },
     ],
   },
   {
@@ -140,7 +145,8 @@ export const proyectos: Proyecto[] = [
     lastPublishedAt: '2026-07-26T10:15:00',
     hoursRemaining: 168,
     deploys: [
-      { id: 'd1', hash: 'b8c9d0e1', status: 'online', isCurrent: true, type: 'React/Vite', version: 'v1', relativeLabel: 'hace 1 día', expiresAtLabel: '2/8/2026, 10:15:00 a.m.', ttlPercent: 88 },
+      { id: 'd2', hash: 'b8c9d0e1', status: 'online', isCurrent: true, type: 'React/Vite', version: 'v2', relativeLabel: 'hace 1 día', expiresAtLabel: '2/8/2026, 10:15:00 a.m.', ttlPercent: 88 },
+      { id: 'd1', hash: '5fa1c802', status: 'offline', isCurrent: false, type: 'React/Vite', version: 'v1', relativeLabel: 'hace 4 días', expiresAtLabel: '29/7/2026, 08:00:00 a.m.', ttlPercent: 0 },
     ],
   },
   {

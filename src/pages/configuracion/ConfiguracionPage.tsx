@@ -1,11 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router'
-import { ChevronDown } from 'lucide-react'
-import { Badge, Button, Card, Textarea } from '@/shared/ui'
-import { tierInfo, requestableTiers } from '@/data/tiers'
-import type { Tier } from '@/data/user'
-
-const MIN_MOTIVO_LENGTH = 10
+import { Badge, Card } from '@/shared/ui'
+import { tierInfo } from '@/data/tiers'
+import { TierRequestCard } from './components/tier-request-card'
+import { RequestToast } from './components/request-toast'
 
 interface ShellContext {
   tier: string
@@ -14,8 +12,13 @@ interface ShellContext {
 export function ConfiguracionPage() {
   const { tier } = useOutletContext<ShellContext>()
   const currentTierInfo = tierInfo.find((option) => option.id === tier) ?? tierInfo[0]
-  const [requestedTier, setRequestedTier] = useState<Tier>(requestableTiers[0].id)
-  const [motivo, setMotivo] = useState('')
+  const [toast, setToast] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!toast) return
+    const timeout = setTimeout(() => setToast(null), 4000)
+    return () => clearTimeout(timeout)
+  }, [toast])
 
   return (
     <div className="flex max-w-2xl flex-col gap-6">
@@ -33,43 +36,9 @@ export function ConfiguracionPage() {
         </div>
       </Card>
 
-      <Card>
-        <h2 className="mb-1 font-medium">Solicitar upgrade de tier</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Describe tu caso de uso. Un administrador revisará tu solicitud.
-        </p>
+      <TierRequestCard onSubmit={() => setToast('Solicitud enviada correctamente.')} />
 
-        <label className="mb-2 block text-xs font-mono text-muted-foreground uppercase">Tier solicitado</label>
-        <div className="relative mb-4">
-          <select
-            value={requestedTier}
-            onChange={(e) => setRequestedTier(e.target.value as Tier)}
-            className="h-10 w-full appearance-none rounded-lg border border-border bg-transparent py-2 pr-9 pl-3 text-sm capitalize text-foreground focus:border-primary focus:outline-none"
-          >
-            {requestableTiers.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label} — {option.limit}
-              </option>
-            ))}
-          </select>
-          <ChevronDown className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" />
-        </div>
-
-        <label className="mb-2 block text-xs font-mono text-muted-foreground uppercase">Motivo</label>
-        <Textarea
-          rows={3}
-          placeholder="Describe tu caso de uso y por qué necesitas un tiempo de deploy más largo..."
-          value={motivo}
-          onChange={(e) => setMotivo(e.target.value)}
-        />
-        <p className="mt-1 text-xs text-muted-foreground">
-          {motivo.length}/{MIN_MOTIVO_LENGTH} caracteres mínimo
-        </p>
-
-        <Button className="mt-4 w-full" disabled={motivo.length < MIN_MOTIVO_LENGTH}>
-          Enviar solicitud
-        </Button>
-      </Card>
+      {toast && <RequestToast message={toast} />}
     </div>
   )
 }

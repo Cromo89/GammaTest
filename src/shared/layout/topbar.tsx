@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react'
 import { Link } from 'react-router'
-import { Bell, ChevronDown, LogOut, Moon, Search, Sun } from 'lucide-react'
+import { Bell, LogOut, Moon, Sun } from 'lucide-react'
 import {
   Badge,
   DropdownMenu,
@@ -12,14 +11,16 @@ import {
 } from '@/shared/ui'
 import { getInitials, NOTIFICATIONS } from './topbar-data'
 import type { DashboardTheme } from './use-dashboard-theme'
+import { LanguageMenu } from './language-menu'
+import { CommandPalette } from './command-palette'
 
 interface TopbarProps {
-  value: string
-  onChange: (value: string) => void
   email: string
   tier: string
   theme: DashboardTheme
   onToggleTheme: () => void
+  language: string
+  onLanguageChange: (code: string) => void
 }
 
 function ThemeToggle({ theme, onToggleTheme }: { theme: DashboardTheme; onToggleTheme: () => void }) {
@@ -99,50 +100,15 @@ function ProfileMenu({ email, tier }: ProfileMenuProps) {
   )
 }
 
-export function Topbar({ value, onChange, email, tier, theme, onToggleTheme }: TopbarProps) {
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-        event.preventDefault()
-        inputRef.current?.focus()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
-
+export function Topbar({ email, tier, theme, onToggleTheme, language, onLanguageChange }: TopbarProps) {
   return (
     <header className="sticky top-0 z-10 hidden h-16 shrink-0 items-center gap-4 border-b border-border bg-background/90 px-8 backdrop-blur-lg lg:flex">
-      <div className="flex h-9 w-full max-w-md items-center gap-2 rounded-lg border border-border bg-muted/40 px-3 has-focus:border-primary">
-        <Search className="size-4 shrink-0 text-muted-foreground" />
-        <input
-          ref={inputRef}
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          placeholder="Buscar proyectos, dominios o publicaciones..."
-          className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-        />
-        <kbd className="hidden shrink-0 rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:block">
-          ⌘K
-        </kbd>
-      </div>
+      <CommandPalette />
 
       <div className="ml-auto flex items-center gap-3">
         <NotificationsMenu />
         <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
-
-        <div className="relative">
-          <select
-            className="h-9 appearance-none rounded-lg border border-border bg-transparent py-2 pr-8 pl-2 text-sm text-foreground"
-            defaultValue="es"
-          >
-            <option value="es">Español</option>
-          </select>
-          <ChevronDown className="pointer-events-none absolute top-1/2 right-2 size-4 -translate-y-1/2 text-muted-foreground" />
-        </div>
-
+        <LanguageMenu value={language} onChange={onLanguageChange} />
         <ProfileMenu email={email} tier={tier} />
       </div>
     </header>

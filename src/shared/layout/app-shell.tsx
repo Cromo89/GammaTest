@@ -4,6 +4,7 @@ import { Sidebar } from './sidebar'
 import { Topbar } from './topbar'
 import { MobileNav } from './mobile-nav'
 import { useDashboardTheme } from './use-dashboard-theme'
+import { LANGUAGES } from './topbar-data'
 
 interface AppShellProps {
   email: string
@@ -13,18 +14,19 @@ interface AppShellProps {
 export function AppShell({ email, tier }: AppShellProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const { theme, toggleTheme } = useDashboardTheme()
+  const [language, setLanguage] = useState(LANGUAGES[0].code)
 
   return (
     <div className="flex h-screen overflow-hidden bg-background text-foreground" data-theme={theme}>
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar
-          value={searchQuery}
-          onChange={setSearchQuery}
           email={email}
           tier={tier}
           theme={theme}
           onToggleTheme={toggleTheme}
+          language={language}
+          onLanguageChange={setLanguage}
         />
         <MobileNav
           value={searchQuery}
@@ -33,6 +35,8 @@ export function AppShell({ email, tier }: AppShellProps) {
           tier={tier}
           theme={theme}
           onToggleTheme={toggleTheme}
+          language={language}
+          onLanguageChange={setLanguage}
         />
         <main className="flex-1 overflow-y-auto px-4 py-6 lg:px-10 lg:py-8">
           <Outlet context={{ tier, searchQuery, email }} />

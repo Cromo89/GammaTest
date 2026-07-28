@@ -26,6 +26,18 @@ export const NOTIFICATIONS: Notification[] = [
   },
 ]
 
+export interface Language {
+  code: string
+  label: string
+  flag: string
+}
+
+export const LANGUAGES: Language[] = [
+  { code: 'es', label: 'Español', flag: '🇨🇱' },
+  { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'pt', label: 'Português', flag: '🇧🇷' },
+]
+
 export function getInitials(email: string) {
   const [local] = email.split('@')
   const initials = local

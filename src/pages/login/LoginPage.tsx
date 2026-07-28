@@ -14,11 +14,11 @@ export function LoginPage() {
       <FlowingColorBend fadeEdge="bottom" grainHighlightIntensity={0.5} speed={0.00022} />
 
       <div className="relative flex w-full max-w-sm flex-col items-center">
-        <Link to="/" className="mb-6 inline-flex">
-          <BrandMark />
-        </Link>
-
         <div className="w-full rounded-2xl border border-white/10 bg-background/40 p-6 shadow-2xl shadow-black/40 backdrop-blur-xl">
+          <Link to="/" className="mb-6 inline-flex">
+            <BrandMark />
+          </Link>
+
           {step === 'email' ? (
             <EmailStep email={email} onEmailChange={setEmail} onSubmit={() => setStep('code')} />
           ) : (
