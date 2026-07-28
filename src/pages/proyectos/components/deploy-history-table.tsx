@@ -12,8 +12,8 @@ export function DeployHistoryTable({ deploys, onRollback, onToggleStatus, onExte
   return (
     <div>
       <p className="mb-2 text-xs font-mono text-muted-foreground uppercase">Historial de deploys</p>
-      <div className="overflow-x-auto rounded-xl border border-border">
-        <table className="w-full text-left">
+      <div className="scrollbar-hide overflow-x-auto rounded-xl border border-border">
+        <table className="w-full min-w-[560px] text-left">
           <thead>
             <tr className="border-b border-border text-xs text-muted-foreground">
               <th className="px-4 py-2 font-medium">Fecha</th>
