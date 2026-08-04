@@ -2,6 +2,7 @@ import { Code2, Upload } from 'lucide-react'
 import { Button } from '@/shared/ui'
 import type { Proyecto } from '@/data/proyectos'
 import { DeleteProjectDialog } from './delete-project-dialog'
+import { ShareProjectDialog } from './share-project-dialog'
 
 interface ProjectDetailHeaderProps {
   proyecto: Proyecto
@@ -26,6 +27,7 @@ export function ProjectDetailHeader({ proyecto, onPublishClick, onDelete }: Proj
           <Upload className="size-4" />
           Publicar nueva versión
         </Button>
+        <ShareProjectDialog projectName={proyecto.name} url={proyecto.url} />
         <DeleteProjectDialog projectName={proyecto.name} onConfirm={onDelete} />
       </div>
     </div>
